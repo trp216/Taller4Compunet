@@ -10,10 +10,10 @@
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.example</groupId>
-	<artifactId>Taller3-AlejandraDiaz</artifactId>
+	<artifactId>Taller4-AlejandraDiaz-JhonEdwardMora</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>Taller3-AlejandraDiaz</name>
-	<description>Third workshop of the Internet Computing course of 2022-1</description>
+	<name>Taller4-AlejandraDiaz-JhonEdwardMora</name>
+	<description>Fourth workshop of the Internet Computing course of 2022-1</description>
 	<properties>
 		<java.version>1.8</java.version>
 	</properties>
