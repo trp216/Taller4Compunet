@@ -1,18 +1,9 @@
 package com.example.demo.integration;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertAll;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.mockito.Mockito.when;
+import static org.junit.jupiter.api.Assertions.*;
 
 import java.math.BigDecimal;
 import java.sql.Timestamp;
-import java.util.Optional;
 
 import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 import org.junit.jupiter.api.Nested;
@@ -37,14 +28,10 @@ import co.edu.icesi.dev.uccareapp.transport.repositories.CountryregionRepository
 import co.edu.icesi.dev.uccareapp.transport.repositories.SalesTerritoryRepository;
 import co.edu.icesi.dev.uccareapp.transport.repositories.SalestaxrateRepository;
 import co.edu.icesi.dev.uccareapp.transport.repositories.StateprovinceRepository;
-import co.edu.icesi.dev.uccareapp.transport.services.AddressService;
 import co.edu.icesi.dev.uccareapp.transport.services.AddressServiceImp;
-import co.edu.icesi.dev.uccareapp.transport.services.CountryregionService;
 import co.edu.icesi.dev.uccareapp.transport.services.CountryregionServiceImp;
 import co.edu.icesi.dev.uccareapp.transport.services.SalesTerritoryService;
-import co.edu.icesi.dev.uccareapp.transport.services.SalestaxrateService;
 import co.edu.icesi.dev.uccareapp.transport.services.SalestaxrateServiceImp;
-import co.edu.icesi.dev.uccareapp.transport.services.StateprovinceService;
 import co.edu.icesi.dev.uccareapp.transport.services.StateprovinceServiceImp;
 
 @ContextConfiguration(classes = Application.class)
@@ -55,7 +42,7 @@ public class IntegrationTests {
 	private CountryregionServiceImp crService;
 
 	private SalesTerritoryRepository stRepo;
-	private SalesTerritoryService stService;
+	//private SalesTerritoryService stService;
 
 	private StateprovinceRepository spRepo;
 	private StateprovinceServiceImp spService;
@@ -85,7 +72,7 @@ public class IntegrationTests {
 		this.aService = aService;
 		this.stxRepo = stxRepo;
 		this.stxService = stxService;
-		this.stService = stService;
+		//this.stService = stService;
 	}
 
 	@Nested

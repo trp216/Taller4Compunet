@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Repository;
@@ -46,7 +47,8 @@ public class CountryRegionDAO implements ICountryRegionDAO{
 	@Override
 	public List<Countryregion> findAll() {
 		String jpql = "Select a from Countryregion a";
-		return 	entityManager.createQuery(jpql).getResultList();	
+		TypedQuery<Countryregion> ret = entityManager.createQuery(jpql, Countryregion.class);
+		return 	ret.getResultList();	
 	}
 	
 }

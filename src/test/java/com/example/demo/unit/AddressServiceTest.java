@@ -1,42 +1,26 @@
 package com.example.demo.unit;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertAll;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
 import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ContextConfiguration;
 
-import co.edu.icesi.dev.uccareapp.transport.Application;
 import co.edu.icesi.dev.uccareapp.transport.exception.ElementNotFoundException;
 import co.edu.icesi.dev.uccareapp.transport.exception.FailedValidationsException;
 import co.edu.icesi.dev.uccareapp.transport.model.person.Address;
-import co.edu.icesi.dev.uccareapp.transport.model.person.Countryregion;
 import co.edu.icesi.dev.uccareapp.transport.model.person.Stateprovince;
 import co.edu.icesi.dev.uccareapp.transport.repositories.AddressRepository;
 import co.edu.icesi.dev.uccareapp.transport.repositories.StateprovinceRepository;
-import co.edu.icesi.dev.uccareapp.transport.services.AddressService;
 import co.edu.icesi.dev.uccareapp.transport.services.AddressServiceImp;
-import co.edu.icesi.dev.uccareapp.transport.services.StateprovinceServiceImp;
 
 //@SpringBootTest
 @ContextConfiguration
@@ -201,7 +185,7 @@ public class AddressServiceTest {
 	@Nested
 	class Edit{
 
-		private void setupScenary2() {
+		/*private void setupScenary2() {
 			sp = new Stateprovince();
 			
 			when(spRepo.findById(123)).thenReturn(Optional.of(sp));
@@ -234,7 +218,7 @@ public class AddressServiceTest {
 			repo.save(address);
 
 			
-		}
+		}*/
 		
 		@Test
 		void testEditAddress0() throws FailedValidationsException, ElementNotFoundException {

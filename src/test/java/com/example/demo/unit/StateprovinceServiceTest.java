@@ -1,31 +1,21 @@
 package com.example.demo.unit;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertAll;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.util.Optional;
 
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ContextConfiguration;
 
-import co.edu.icesi.dev.uccareapp.transport.Application;
 import co.edu.icesi.dev.uccareapp.transport.exception.ElementNotFoundException;
 import co.edu.icesi.dev.uccareapp.transport.exception.FailedValidationsException;
 import co.edu.icesi.dev.uccareapp.transport.model.person.Countryregion;
@@ -34,7 +24,6 @@ import co.edu.icesi.dev.uccareapp.transport.model.sales.Salesterritory;
 import co.edu.icesi.dev.uccareapp.transport.repositories.CountryregionRepository;
 import co.edu.icesi.dev.uccareapp.transport.repositories.SalesTerritoryRepository;
 import co.edu.icesi.dev.uccareapp.transport.repositories.StateprovinceRepository;
-import co.edu.icesi.dev.uccareapp.transport.services.StateprovinceService;
 import co.edu.icesi.dev.uccareapp.transport.services.StateprovinceServiceImp;
 
 //@SpringBootTest
@@ -124,7 +113,7 @@ public class StateprovinceServiceTest {
 			st.setSaleslastyear(new BigDecimal(6000700));
 			st.setSalesytd(new BigDecimal(427300));
 
-			Salesterritory candy = new Salesterritory();
+			//Salesterritory candy = new Salesterritory();
 			
 			when(stRepo.findById(3456)).thenReturn(Optional.of(st));
 

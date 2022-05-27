@@ -1,11 +1,9 @@
 package co.edu.icesi.dev.uccareapp.transport.services;
 
-import java.util.Optional;
 
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.SpringApplication;
 import org.springframework.stereotype.Service;
 
 import co.edu.icesi.dev.uccareapp.transport.dao.CountryRegionDAO;
@@ -13,14 +11,10 @@ import co.edu.icesi.dev.uccareapp.transport.dao.SalesTerritoryDAO;
 import co.edu.icesi.dev.uccareapp.transport.dao.StateProvinceDAO;
 import co.edu.icesi.dev.uccareapp.transport.exception.ElementNotFoundException;
 import co.edu.icesi.dev.uccareapp.transport.exception.FailedValidationsException;
-import co.edu.icesi.dev.uccareapp.transport.model.person.Address;
 import co.edu.icesi.dev.uccareapp.transport.model.person.Countryregion;
 import co.edu.icesi.dev.uccareapp.transport.model.person.Stateprovince;
 import co.edu.icesi.dev.uccareapp.transport.model.sales.Salesterritory;
-import co.edu.icesi.dev.uccareapp.transport.model.user.UserApp;
-import co.edu.icesi.dev.uccareapp.transport.repositories.CountryregionRepository;
-import co.edu.icesi.dev.uccareapp.transport.repositories.SalesTerritoryRepository;
-import co.edu.icesi.dev.uccareapp.transport.repositories.StateprovinceRepository;
+
 
 @Service
 public class StateprovinceServiceImp implements StateprovinceService{

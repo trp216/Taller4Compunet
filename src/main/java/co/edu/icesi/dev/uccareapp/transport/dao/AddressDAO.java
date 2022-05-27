@@ -4,9 +4,8 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -55,7 +54,8 @@ public class AddressDAO implements IAddressDAO{
 	@Override
 	public List<Address> findAll() {
 		String jpql = "Select a from Address a";
-		return 	entityManager.createQuery(jpql).getResultList();	
+		TypedQuery<Address> ret = entityManager.createQuery(jpql, Address.class);
+		return 	ret.getResultList();	
 	}
 	
 	//Permita que los direcciones puedan 

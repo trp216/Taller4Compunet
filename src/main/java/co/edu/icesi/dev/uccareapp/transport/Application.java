@@ -4,12 +4,8 @@ import java.math.BigDecimal;
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.thymeleaf.extras.java8time.dialect.Java8TimeDialect;
 
 import co.edu.icesi.dev.uccareapp.transport.dao.AddressDAO;
@@ -24,13 +20,7 @@ import co.edu.icesi.dev.uccareapp.transport.model.sales.Salestaxrate;
 import co.edu.icesi.dev.uccareapp.transport.model.sales.Salesterritory;
 import co.edu.icesi.dev.uccareapp.transport.model.user.UserApp;
 import co.edu.icesi.dev.uccareapp.transport.model.user.UserType;
-import co.edu.icesi.dev.uccareapp.transport.repositories.AddressRepository;
-import co.edu.icesi.dev.uccareapp.transport.repositories.CountryregionRepository;
-import co.edu.icesi.dev.uccareapp.transport.repositories.SalesTerritoryRepository;
-import co.edu.icesi.dev.uccareapp.transport.repositories.SalestaxrateRepository;
-import co.edu.icesi.dev.uccareapp.transport.repositories.StateprovinceRepository;
 import co.edu.icesi.dev.uccareapp.transport.repositories.UserRepository;
-import co.edu.icesi.dev.uccareapp.transport.services.UserServiceImpl;
 
 @SpringBootApplication
 //@EnableJpaRepositories("com.example.demo.repositories")

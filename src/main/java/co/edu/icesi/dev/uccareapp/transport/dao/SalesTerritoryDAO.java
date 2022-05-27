@@ -4,14 +4,12 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import co.edu.icesi.dev.uccareapp.transport.model.person.Address;
 import co.edu.icesi.dev.uccareapp.transport.model.sales.Salesterritory;
 
 @Repository
@@ -60,7 +58,8 @@ public class SalesTerritoryDAO implements ISalesTerritoryDAO{
 	@Override
 	public List<Salesterritory> findAll() {
 		String jpql = "Select st from Salesterritory st";
-		return 	entityManager.createQuery(jpql).getResultList();	
+		TypedQuery<Salesterritory> query = entityManager.createQuery(jpql, Salesterritory.class);
+		return 	query.getResultList();	
 	}
 	
 }

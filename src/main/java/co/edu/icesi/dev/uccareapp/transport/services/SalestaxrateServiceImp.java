@@ -1,8 +1,5 @@
 package co.edu.icesi.dev.uccareapp.transport.services;
 
-import java.math.BigDecimal;
-import java.util.Optional;
-
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,12 +9,8 @@ import co.edu.icesi.dev.uccareapp.transport.dao.SalesTaxRateDAO;
 import co.edu.icesi.dev.uccareapp.transport.dao.StateProvinceDAO;
 import co.edu.icesi.dev.uccareapp.transport.exception.ElementNotFoundException;
 import co.edu.icesi.dev.uccareapp.transport.exception.FailedValidationsException;
-import co.edu.icesi.dev.uccareapp.transport.model.person.Address;
-import co.edu.icesi.dev.uccareapp.transport.model.person.Stateprovince;
 import co.edu.icesi.dev.uccareapp.transport.model.sales.Salestaxrate;
-import co.edu.icesi.dev.uccareapp.transport.model.user.UserApp;
-import co.edu.icesi.dev.uccareapp.transport.repositories.SalestaxrateRepository;
-import co.edu.icesi.dev.uccareapp.transport.repositories.StateprovinceRepository;
+
 
 @Service
 public class SalestaxrateServiceImp implements SalestaxrateService{

@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import co.edu.icesi.dev.uccareapp.transport.model.person.Address;
-import co.edu.icesi.dev.uccareapp.transport.model.user.UserApp;
 import co.edu.icesi.dev.uccareapp.transport.services.AddressServiceImp;
 import co.edu.icesi.dev.uccareapp.transport.services.StateprovinceServiceImp;
 import co.edu.icesi.dev.uccareapp.transport.validation.Miracle;

@@ -4,7 +4,7 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Repository;
@@ -12,8 +12,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import co.edu.icesi.dev.uccareapp.transport.model.person.Address;
 import co.edu.icesi.dev.uccareapp.transport.model.person.Stateprovince;
-import co.edu.icesi.dev.uccareapp.transport.model.sales.Salestaxrate;
-import co.edu.icesi.dev.uccareapp.transport.model.sales.Salesterritory;
 
 @Repository
 @Transactional
@@ -49,7 +47,8 @@ public class StateProvinceDAO implements IStateProvinceDAO{
 	@Override
 	public List<Stateprovince> findAll() {
 		String jpql = "Select a from Stateprovince a";
-		return 	entityManager.createQuery(jpql).getResultList();	
+		TypedQuery<Stateprovince> q = entityManager.createQuery(jpql, Stateprovince.class);
+		return 	q.getResultList();	
 	}
 
 	//Permita que los estados-provincia puedan buscarse 
