@@ -7,6 +7,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import co.edu.icesi.dev.uccareapp.transport.delegate.CountryregionDelegateImp;
 import co.edu.icesi.dev.uccareapp.transport.model.person.Countryregion;
 import co.edu.icesi.dev.uccareapp.transport.services.CountryregionServiceImp;
 import co.edu.icesi.dev.uccareapp.transport.validation.Miracle;
@@ -14,17 +15,17 @@ import co.edu.icesi.dev.uccareapp.transport.validation.Miracle;
 @Controller
 public class CountryregionControllerImpl {
 	
-	CountryregionServiceImp crService;
+	//CountryregionServiceImp crService;
+	private CountryregionDelegateImp crDelegate;
 
 	@Autowired
-	public CountryregionControllerImpl(CountryregionServiceImp crService) {
-		super();
-		this.crService = crService;
+	public CountryregionControllerImpl(CountryregionDelegateImp crDelegate) {
+		this.crDelegate = crDelegate;
 	}
 	
 	@GetMapping("/countryregion/")
 	public String indexCountryregion(Model model) {
-		model.addAttribute("countries", crService.findAll());
+		model.addAttribute("countries", crDelegate.findAll());
 		return "countryregion/index";
 	}
 	
@@ -48,14 +49,14 @@ public class CountryregionControllerImpl {
 
 			}
 
-			crService.save(countryregion);
+			crDelegate.save(countryregion);
 		}
 		return "redirect:/countryregion/";
 	}
 	
 	@GetMapping("/countryregion/edit/{id}")
 	public String showEditCountryregion(@PathVariable("id") Integer id,Model model) {
-		Countryregion countryregion = crService.findById(id);
+		Countryregion countryregion = crDelegate.findById(id);
 		
 		if (countryregion == null)
 			throw new IllegalArgumentException("Invalid country Id:" + id);
@@ -73,13 +74,13 @@ public class CountryregionControllerImpl {
 		}
 		
 		if(bindingResult.hasErrors()) {
-			model.addAttribute("countries", crService.findAll());
+			model.addAttribute("countries", crDelegate.findAll());
 			return "countryregion/index";
 		}
 		if (!action.equalsIgnoreCase("Cancel")) {
 			countryregion.setCountryregionid(id);
-			crService.edit(countryregion);
-			model.addAttribute("countries", crService.findAll());
+			crDelegate.edit(countryregion);
+			model.addAttribute("countries", crDelegate.findAll());
 		}
 		return "redirect:/countryregion/";
 	}

@@ -13,5 +13,7 @@ public interface CountryregionService {
 	
 	public void save(Countryregion cr);
 
-	Countryregion findById(Integer id);
+	public Countryregion findById(Integer id);
+	
+	public Countryregion edit(Countryregion countryregion);
 }
