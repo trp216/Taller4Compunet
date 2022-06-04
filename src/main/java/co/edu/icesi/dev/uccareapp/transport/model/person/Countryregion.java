@@ -13,6 +13,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import co.edu.icesi.dev.uccareapp.transport.validation.Miracle;
 
 /**
@@ -47,6 +49,7 @@ public class Countryregion implements Serializable {
 
 	// bi-directional many-to-one association to Stateprovince
 	@OneToMany(mappedBy = "countryregion")
+	@JsonIgnore
 	private List<Stateprovince> stateprovinces;
 
 	public Countryregion() {

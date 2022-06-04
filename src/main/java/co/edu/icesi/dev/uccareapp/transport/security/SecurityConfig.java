@@ -45,7 +45,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		//			//.invalidateHttpSession(true).clearAuthentication(true)
 		//				//.logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/login?logout")
 		//				.permitAll().and().exceptionHandling().accessDeniedHandler(accessDeniedHandler);
-		httpSecurity.formLogin().loginPage("/login").permitAll().and().authorizeRequests()
+		httpSecurity.csrf().disable().formLogin().loginPage("/login").permitAll().and().authorizeRequests()
 		//El administrador puede gestionar los países-regiones y las
 		//tasas impositivas de las ventas, y los operadores las direcciones 
 		//y los estados-provincias

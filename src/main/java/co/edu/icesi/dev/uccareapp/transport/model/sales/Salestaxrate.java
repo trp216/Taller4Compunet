@@ -16,6 +16,8 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.PositiveOrZero;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import co.edu.icesi.dev.uccareapp.transport.model.person.Stateprovince;
 import co.edu.icesi.dev.uccareapp.transport.validation.Miracle;
 
@@ -43,6 +45,7 @@ public class Salestaxrate implements Serializable {
 	@NotNull(groups = Miracle.class)
 	@ManyToOne
 	@JoinColumn(name = "stateprovinceid")
+	@JsonIgnore
 	private Stateprovince stateprovince;
 
 	@PositiveOrZero(groups=Miracle.class)
