@@ -23,7 +23,7 @@ public class CountryregionControllerImpl {
 		this.crDelegate = crDelegate;
 	}
 	
-	@GetMapping("/countryregion/")
+	@GetMapping("/countryregion")
 	public String indexCountryregion(Model model) {
 		model.addAttribute("countries", crDelegate.findAll());
 		return "countryregion/index";
@@ -36,7 +36,7 @@ public class CountryregionControllerImpl {
 		return "countryregion/add-countryregion";
 	}
 	
-	@PostMapping("/countryregion/add/")
+	@PostMapping("/countryregion/add")
 	public String saveCountryregion(@Validated(Miracle.class) @ModelAttribute Countryregion countryregion, BindingResult bindingResult,
 			Model model, @RequestParam(value = "action", required = true) String action) {
 		if (!action.equals("Cancel")) {

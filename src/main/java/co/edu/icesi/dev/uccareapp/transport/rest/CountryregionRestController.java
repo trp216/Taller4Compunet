@@ -17,13 +17,14 @@ public class CountryregionRestController {
 	@Autowired
 	private CountryregionServiceImp crService;
 
-	@RequestMapping(value = "/api/countryregion/", method = RequestMethod.GET)
+	@RequestMapping(value = "/countryregion/api/", method = RequestMethod.GET)
 	public Iterable<Countryregion> findAll() {
+		System.out.println( crService.findAll().toString());
 		return crService.findAll();
 	}
 	
 	
-	@RequestMapping(value = "/countryregion/api/add/", method = RequestMethod.POST)
+	@RequestMapping(value = "/api/countryregion/add/", method = RequestMethod.POST)
 	public void saveCountryregion(@RequestBody Countryregion countryregion) {
 		try {
 			crService.save(countryregion);
@@ -34,7 +35,7 @@ public class CountryregionRestController {
 	}
 	
 	
-	@RequestMapping(value = "/countryregion/api/edit/{id}", method = RequestMethod.PUT)
+	@RequestMapping(value = "/api/countryregion/edit/{id}", method = RequestMethod.PUT)
 	public Countryregion editCountryregion(@RequestBody Countryregion countryregion) {
 		
 		try {
