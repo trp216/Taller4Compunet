@@ -17,9 +17,8 @@ public class CountryregionRestController {
 	@Autowired
 	private CountryregionServiceImp crService;
 
-	@RequestMapping(value = "/countryregion/api/", method = RequestMethod.GET)
+	@RequestMapping(value = "/api/countryregion/", method = RequestMethod.GET)
 	public Iterable<Countryregion> findAll() {
-		System.out.println( crService.findAll().toString());
 		return crService.findAll();
 	}
 	

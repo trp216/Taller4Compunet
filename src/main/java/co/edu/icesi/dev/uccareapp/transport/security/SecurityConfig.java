@@ -50,6 +50,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		//tasas impositivas de las ventas, y los operadores las direcciones 
 		//y los estados-provincias
 		.antMatchers("/users/**").permitAll()
+		 .antMatchers("/api/**").permitAll().and().authorizeRequests()
 		.antMatchers("/countryregion/**").hasRole("admin")
 		.antMatchers("/tax/**").hasRole("admin")
 		//.antMatchers("/users/**").hasRole("operator")

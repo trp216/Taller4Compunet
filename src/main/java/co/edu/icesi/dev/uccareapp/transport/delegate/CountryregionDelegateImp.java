@@ -12,7 +12,7 @@ import co.edu.icesi.dev.uccareapp.transport.model.person.Countryregion;
 @Component
 public class CountryregionDelegateImp implements CountryregionDelegate{
 
-	public final static String PATH = "http://localhost:8080/countryregion/api/";
+	public final static String PATH = "http://localhost:8080/api/countryregion/";
 	
 	private RestTemplate rest;
 	
