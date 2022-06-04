@@ -107,10 +107,12 @@ public class StateprovinceServiceImp implements StateprovinceService{
 		return result;
 	}
 
+	@Override
 	public Stateprovince findById(Integer id) {
 		return spDAO.findById(id);
 	}
 	
+	@Override
 	public Iterable<Stateprovince> findAll() {
 		return spDAO.findAll();
 	}
@@ -122,14 +124,18 @@ public class StateprovinceServiceImp implements StateprovinceService{
 		spDAO.save(sp);
 	}
 
+	@Override
 	@Transactional
-	public Stateprovince edit(Stateprovince sp, Integer countryregionid) {
+	//public Stateprovince edit(Stateprovince sp, Integer countryregionid) {
+	public Stateprovince edit(Stateprovince sp) {
+			
 		Stateprovince actual = null;
 		
 		if(sp.getStateprovinceid() != null) {
 			Stateprovince optional = spDAO.findById(sp.getStateprovinceid());
 			if(optional!=null) {
-				sp.setCountryregion(crDAO.findById(countryregionid));
+				//sp.setCountryregion(crDAO.findById(countryregionid));
+				sp.setCountryregion(crDAO.findById(sp.getCountryregion().getCountryregionid()));
 //				save(sp);
 				actual = spDAO.update(sp);
 			}

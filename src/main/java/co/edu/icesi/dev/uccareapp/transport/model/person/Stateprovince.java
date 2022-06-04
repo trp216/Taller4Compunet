@@ -57,7 +57,7 @@ public class Stateprovince implements Serializable {
 	// bi-directional many-to-one association to Countryregion
 	@ManyToOne
 	@JoinColumn(name = "countryregioncode")
-	@JsonIgnore
+	//@JsonIgnore
 	private Countryregion countryregion;
 
 	public Stateprovince() {
