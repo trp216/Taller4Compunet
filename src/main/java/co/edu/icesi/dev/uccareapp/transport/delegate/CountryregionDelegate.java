@@ -1,6 +1,5 @@
 package co.edu.icesi.dev.uccareapp.transport.delegate;
 
-import co.edu.icesi.dev.uccareapp.transport.exception.FailedValidationsException;
 import co.edu.icesi.dev.uccareapp.transport.model.person.Countryregion;
 
 public interface CountryregionDelegate {
