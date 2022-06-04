@@ -5,37 +5,44 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import co.edu.icesi.dev.uccareapp.transport.delegate.SalextaxrateDelegateImp;
+import co.edu.icesi.dev.uccareapp.transport.delegate.UserDelegate;
 import co.edu.icesi.dev.uccareapp.transport.model.user.UserApp;
 import co.edu.icesi.dev.uccareapp.transport.services.UserServiceImpl;
 
 @Controller
 public class UserControllerImpl implements UserController{
 	
-	UserServiceImpl userService;
+	//UserServiceImpl userService;
+	private UserDelegate userDelegate;
 	
 	@Autowired
-	public UserControllerImpl(UserServiceImpl userService) {
-		this.userService = userService;
+	public UserControllerImpl(UserDelegate userDelegate) {
+		this.userDelegate = userDelegate;
 	}
+	
+//	public UserControllerImpl(UserServiceImpl userService) {
+//		this.userService = userService;
+//	}
 	
 	@GetMapping("/users/del/{id}")
 	public String deleteUser(@PathVariable("id") long id, Model model) {
-		UserApp user = userService.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid user Id:" + id));
-		userService.delete(user);
-		model.addAttribute("users", userService.findAll());
+		UserApp user = userDelegate.findById(id);
+		userDelegate.delete(user);
+		model.addAttribute("users", userDelegate.findAll());
 		return "users/index";
 	}
 
 	@GetMapping("/users/")
 	public String indexUser(Model model) {
-		model.addAttribute("users", userService.findAll());
+		model.addAttribute("users", userDelegate.findAll());
 		return "users/index";
 	}
 	
 	@GetMapping("/login")
 	public String login(Model model) {
-		model.addAttribute("users", userService.findAll());
-		System.out.println(userService.findAll());
+		model.addAttribute("users", userDelegate.findAll());
+		//System.out.println(userDelegate.findAll());
 		return "/login";
 	}
 

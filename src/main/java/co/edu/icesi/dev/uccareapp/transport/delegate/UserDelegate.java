@@ -1,14 +1,12 @@
-package co.edu.icesi.dev.uccareapp.transport.services;
+package co.edu.icesi.dev.uccareapp.transport.delegate;
 
-
-import org.springframework.stereotype.Service;
+import java.util.Optional;
 
 import co.edu.icesi.dev.uccareapp.transport.model.user.UserApp;
 import co.edu.icesi.dev.uccareapp.transport.model.user.UserType;
 
-@Service
-public interface UserService {
-	
+public interface UserDelegate {
+
 	public void save(UserApp user);
 
 	public UserApp findById(long id);
@@ -23,5 +21,5 @@ public interface UserService {
 
 
 	public UserType[] getTypes();
-
+	
 }
