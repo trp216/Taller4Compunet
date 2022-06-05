@@ -20,6 +20,7 @@ import org.springframework.web.client.RestTemplate;
 
 import co.edu.icesi.dev.uccareapp.transport.Application;
 import co.edu.icesi.dev.uccareapp.transport.delegate.CountryregionDelegateImp;
+import co.edu.icesi.dev.uccareapp.transport.model.person.Address;
 import co.edu.icesi.dev.uccareapp.transport.model.person.Countryregion;
 
 @ContextConfiguration(classes = Application.class)
@@ -102,14 +103,14 @@ public class CountryregionDelegateTest {
 		setup2();
 		
 		Countryregion cr2 = new Countryregion();
-		cr1.setName("China");
-		cr1.setCountryregioncode("C45");
-		cr1.setCountryregionid(2);
+		cr2.setName("China");
+		cr2.setCountryregioncode("C45");
+		cr2.setCountryregionid(2);
 		
 		Countryregion cr3 = new Countryregion();
-		cr1.setName("Canada");
-		cr1.setCountryregioncode("C17");
-		cr1.setCountryregionid(3);
+		cr3.setName("Canada");
+		cr3.setCountryregioncode("C17");
+		cr3.setCountryregionid(3);
 		
 		Countryregion[] crs = {cr2,cr3};
 		
@@ -119,6 +120,12 @@ public class CountryregionDelegateTest {
 		Iterable<Countryregion> crsResult = crDelegate.findAll();
 		assertNotNull(crsResult);
 		
+		String names ="";
+		for (Countryregion t: crsResult) {
+			names+= t.getName()+" ";
+		}	
+		
+		assertEquals(names,"China Canada ");
 
 	}
 	

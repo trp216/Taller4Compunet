@@ -19,6 +19,7 @@ import org.springframework.web.client.RestTemplate;
 
 import co.edu.icesi.dev.uccareapp.transport.Application;
 import co.edu.icesi.dev.uccareapp.transport.delegate.SalextaxrateDelegateImp;
+import co.edu.icesi.dev.uccareapp.transport.model.person.Address;
 import co.edu.icesi.dev.uccareapp.transport.model.person.Countryregion;
 import co.edu.icesi.dev.uccareapp.transport.model.person.Stateprovince;
 import co.edu.icesi.dev.uccareapp.transport.model.sales.Salestaxrate;
@@ -94,11 +95,13 @@ public class SalextaxrateDelegateTest {
 	public void findAllTest() {
 		setup2();
 		
-		Salestaxrate cr2 = new Salestaxrate();
+		Salestaxrate str2 = new Salestaxrate();
+		str2.setName("Aranceles");
 		
-		Salestaxrate cr3 = new Salestaxrate();
+		Salestaxrate str3 = new Salestaxrate();
+		str3.setName("ICA");
 		
-		Salestaxrate[] crs = {cr2,cr3};
+		Salestaxrate[] crs = {str1,str2,str3};
 		
 		Mockito.when(rest.getForObject("http://localhost:8080/api/tax/",Salestaxrate[].class))
 		.thenReturn(new ResponseEntity<Salestaxrate[]>(crs,HttpStatus.OK).getBody());
@@ -106,6 +109,12 @@ public class SalextaxrateDelegateTest {
 		Iterable<Salestaxrate> strsResult = delegate.findAll();
 		assertNotNull(strsResult);
 		
+		String names ="";
+		for (Salestaxrate t: strsResult) {
+			names+= t.getName()+" ";
+		}	
+		
+		assertEquals(names,"IVA Aranceles ICA ");
 
 	}
 	

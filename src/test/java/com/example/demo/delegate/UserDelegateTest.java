@@ -110,7 +110,13 @@ public class UserDelegateTest {
 		
 		Iterable<UserApp> usersResult = userDelegate.findAll();
 		assertNotNull(usersResult);
+
+		String usernames ="";
+		for (UserApp t: usersResult) {
+			usernames+= t.getUsername()+" ";
+		}	
 		
+		assertEquals(usernames,"taylor99 troubletrouble ");
 
 	}
 	
