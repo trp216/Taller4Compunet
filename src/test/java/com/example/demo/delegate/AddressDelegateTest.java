@@ -3,7 +3,6 @@ package com.example.demo.delegate;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-import java.math.BigDecimal;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -21,7 +20,7 @@ import co.edu.icesi.dev.uccareapp.transport.Application;
 import co.edu.icesi.dev.uccareapp.transport.delegate.AddressDelegateImp;
 import co.edu.icesi.dev.uccareapp.transport.model.person.Address;
 import co.edu.icesi.dev.uccareapp.transport.model.person.Stateprovince;
-import co.edu.icesi.dev.uccareapp.transport.model.sales.Salestaxrate;
+
 
 @ContextConfiguration(classes = Application.class)
 @SpringBootTest
