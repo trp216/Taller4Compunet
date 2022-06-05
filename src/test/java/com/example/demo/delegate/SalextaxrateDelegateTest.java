@@ -19,11 +19,8 @@ import org.springframework.web.client.RestTemplate;
 
 import co.edu.icesi.dev.uccareapp.transport.Application;
 import co.edu.icesi.dev.uccareapp.transport.delegate.SalextaxrateDelegateImp;
-import co.edu.icesi.dev.uccareapp.transport.model.person.Address;
-import co.edu.icesi.dev.uccareapp.transport.model.person.Countryregion;
 import co.edu.icesi.dev.uccareapp.transport.model.person.Stateprovince;
 import co.edu.icesi.dev.uccareapp.transport.model.sales.Salestaxrate;
-import co.edu.icesi.dev.uccareapp.transport.services.StateprovinceServiceImp;
 
 @ContextConfiguration(classes = Application.class)
 @SpringBootTest

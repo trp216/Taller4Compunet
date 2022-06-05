@@ -1,8 +1,5 @@
 package com.example.demo.delegate;
 
-//import static org.junit.Assert.assertNotNull;
-//import static org.junit.Assert.assertEquals;
-//import static org.junit.Assert.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
@@ -20,7 +17,6 @@ import org.springframework.web.client.RestTemplate;
 
 import co.edu.icesi.dev.uccareapp.transport.Application;
 import co.edu.icesi.dev.uccareapp.transport.delegate.CountryregionDelegateImp;
-import co.edu.icesi.dev.uccareapp.transport.model.person.Address;
 import co.edu.icesi.dev.uccareapp.transport.model.person.Countryregion;
 
 @ContextConfiguration(classes = Application.class)
