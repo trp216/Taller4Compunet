@@ -14,12 +14,13 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 
-import co.edu.icesi.dev.uccareapp.transport.model.hr.Employee;
+import lombok.ToString;
 
 /**
  * The persistent class for the person database table.
  *
  */
+@ToString
 @Entity
 @NamedQuery(name = "Person.findAll", query = "SELECT p FROM Person p")
 public class Person implements Serializable {
@@ -54,15 +55,14 @@ public class Person implements Serializable {
 
 	private String title;
 
-	@OneToOne
-	private Employee employee;
+	private Integer employeeId;
 
-	public Employee getEmployee() {
-		return employee;
+	public Integer getEmployeeId() {
+		return employeeId;
 	}
 
-	public void setEmployee(Employee employee) {
-		this.employee = employee;
+	public void setEmployeeId(Integer employeeId) {
+		this.employeeId = employeeId;
 	}
 
 	// bi-directional many-to-one association to Businessentitycontact

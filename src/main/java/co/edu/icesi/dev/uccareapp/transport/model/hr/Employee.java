@@ -11,17 +11,17 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import co.edu.icesi.dev.uccareapp.transport.model.person.Person;
+import lombok.ToString;
 
 /**
  * The persistent class for the employee database table.
  *
  */
+@ToString
 @Entity
 @NamedQuery(name = "Employee.findAll", query = "SELECT e FROM Employee e")
 public class Employee implements Serializable {
@@ -62,15 +62,14 @@ public class Employee implements Serializable {
 
 	private Integer vacationhours;
 
-	@OneToOne(mappedBy = "employee")
-	private Person person;
+	private Integer personid;
 
-	public Person getPerson() {
-		return person;
+	public Integer getPersonid() {
+		return personid;
 	}
 
-	public void setPerson(Person person) {
-		this.person = person;
+	public void setPersonid(Integer personid) {
+		this.personid = personid;
 	}
 
 	// bi-directional many-to-one association to Employeedepartmenthistory
