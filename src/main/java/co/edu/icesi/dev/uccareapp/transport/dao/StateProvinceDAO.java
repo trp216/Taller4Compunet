@@ -110,6 +110,7 @@ public class StateProvinceDAO implements IStateProvinceDAO{
 
 		return entityManager.createQuery(jpql,Address.class).getResultList();
 
+			
 	}
 
 

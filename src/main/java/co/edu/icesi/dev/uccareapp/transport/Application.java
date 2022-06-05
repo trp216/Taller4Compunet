@@ -1,6 +1,11 @@
 package co.edu.icesi.dev.uccareapp.transport;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -16,10 +21,12 @@ import co.edu.icesi.dev.uccareapp.transport.dao.StateProvinceDAO;
 import co.edu.icesi.dev.uccareapp.transport.model.person.Address;
 import co.edu.icesi.dev.uccareapp.transport.model.person.Countryregion;
 import co.edu.icesi.dev.uccareapp.transport.model.person.Stateprovince;
+import co.edu.icesi.dev.uccareapp.transport.model.sales.Salesorderheader;
 import co.edu.icesi.dev.uccareapp.transport.model.sales.Salestaxrate;
 import co.edu.icesi.dev.uccareapp.transport.model.sales.Salesterritory;
 import co.edu.icesi.dev.uccareapp.transport.model.user.UserApp;
 import co.edu.icesi.dev.uccareapp.transport.model.user.UserType;
+import co.edu.icesi.dev.uccareapp.transport.repositories.SalesorderheadersRepository;
 import co.edu.icesi.dev.uccareapp.transport.repositories.UserRepository;
 
 //Uncomment to test:
@@ -29,25 +36,18 @@ import org.springframework.context.annotation.ComponentScan;
 //@EnableJpaRepositories("com.example.demo.repositories")
 //@EnableAutoConfiguration
 //@EntityScan(basePackages= {"com.example.demo.model","co.edu.icesi.dev.uccareapp.transport.model.person","co.edu.icesi.dev.uccareapp.transport.model.sales", "co.edu.icesi.dev.uccareapp.transport.model.hr"})
-@ComponentScan(basePackages = {"co.edu.icesi.dev.uccareapp.transport.controller","co.edu.icesi.dev.uccareapp.transport.dao","co.edu.icesi.dev.uccareapp.transport.delegate","co.edu.icesi.dev.uccareapp.transport.repositories","co.edu.icesi.dev.uccareapp.transport.rest","co.edu.icesi.dev.uccareapp.transport.services","co.edu.icesi.dev.uccareapp.transport.validation"} )
+//@ComponentScan(basePackages = {"co.edu.icesi.dev.uccareapp.transport.controller","co.edu.icesi.dev.uccareapp.transport.dao","co.edu.icesi.dev.uccareapp.transport.delegate","co.edu.icesi.dev.uccareapp.transport.repositories","co.edu.icesi.dev.uccareapp.transport.rest","co.edu.icesi.dev.uccareapp.transport.services","co.edu.icesi.dev.uccareapp.transport.validation"} )
 public class Application {
 
 	@Bean
 
-//	public CommandLineRunner dummy(UserRepository userRepository
-//			,AddressRepository addressRepository, 
-//			StateprovinceRepository stateprovinceRepository 
-//			,SalestaxrateRepository strRepository
-//			,CountryregionRepository crRepository
-//			,SalesTerritoryRepository territoryRepository
-//			) 
-	
 	public CommandLineRunner dummy(UserRepository userRepository
 			,AddressDAO addressRepository, 
 			StateProvinceDAO stateprovinceRepository 
 			,SalesTaxRateDAO strRepository
 			,CountryRegionDAO crRepository
 			,SalesTerritoryDAO territoryRepository
+			,SalesorderheadersRepository sohRepository
 			){
 
 		//para cerrar sesion:
@@ -83,6 +83,7 @@ public class Application {
 	    	Salesterritory territory = new Salesterritory();
 	    	territory.setName("Zona del pacifico");
 	    	
+	    	
 	    	territoryRepository.save(territory);
 	    	
 	    	
@@ -101,6 +102,20 @@ public class Application {
 	    	a1.setPostalcode("A12345");
 	    	a1.setSpatiallocation("Comuna 2");
 	    	a1.setStateprovince(sp1);
+	    	List<Salesorderheader> soh = new ArrayList<Salesorderheader>();
+	    	
+	    	Salesorderheader s1 = new Salesorderheader();
+	    	sohRepository.save(s1);
+	    	Salesorderheader s2 = new Salesorderheader();
+	    	sohRepository.save(s2);
+	    	Salesorderheader s3 = new Salesorderheader();
+	    	sohRepository.save(s3);
+	    	
+	    	soh.add(s1);
+	    	soh.add(s2);
+	    	soh.add(s3);
+	    	
+	    	a1.setSalesorderheaders(soh);
 	    	
 	    	addressRepository.save(a1);
 	    	
