@@ -21,20 +21,17 @@ public class CountryregionDelegateImp implements CountryregionDelegate{
 
 	@Override
 	public Iterable<Countryregion> findAll() {
-		// TODO Auto-generated method stub
 		Countryregion[] crs = rest.getForObject(PATH, Countryregion[].class);
 		return Arrays.asList(crs);
 	}
 
 	@Override
 	public void save(Countryregion cr) {
-		// TODO Auto-generated method stub
 		rest.postForEntity(PATH, cr, Countryregion.class);
 	}
 
 	@Override
 	public Countryregion findById(Integer id) {
-		// TODO Auto-generated method stub
 		return rest.getForObject(PATH+id, Countryregion.class);
 	}
 

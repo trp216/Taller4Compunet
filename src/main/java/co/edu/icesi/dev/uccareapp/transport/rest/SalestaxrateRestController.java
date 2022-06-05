@@ -31,7 +31,6 @@ public class SalestaxrateRestController {
 		try {
 			strService.save(str);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -49,7 +48,6 @@ public class SalestaxrateRestController {
 			}
 			
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return str;
 		}

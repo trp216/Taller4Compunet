@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import co.edu.icesi.dev.uccareapp.transport.model.person.Countryregion;
 import co.edu.icesi.dev.uccareapp.transport.model.person.Stateprovince;
-import co.edu.icesi.dev.uccareapp.transport.model.sales.Salestaxrate;
 import co.edu.icesi.dev.uccareapp.transport.model.sales.Salesterritory;
 import co.edu.icesi.dev.uccareapp.transport.services.CountryregionServiceImp;
 import co.edu.icesi.dev.uccareapp.transport.services.SalesTerritoryService;
@@ -37,7 +36,6 @@ public class StateprovinceRestController {
 		try {
 			spService.save(stateprovince);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -49,7 +47,6 @@ public class StateprovinceRestController {
 				return spService.edit(stateprovince);
 			
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return stateprovince;
 		}

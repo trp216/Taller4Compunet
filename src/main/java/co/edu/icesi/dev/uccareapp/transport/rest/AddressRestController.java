@@ -32,7 +32,6 @@ public class AddressRestController {
 		try {
 			adService.save(address);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -50,7 +49,6 @@ public class AddressRestController {
 			}
 			
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return address;
 		}

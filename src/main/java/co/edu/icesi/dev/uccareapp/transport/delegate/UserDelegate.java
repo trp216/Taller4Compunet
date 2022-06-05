@@ -1,7 +1,5 @@
 package co.edu.icesi.dev.uccareapp.transport.delegate;
 
-import java.util.Optional;
-
 import co.edu.icesi.dev.uccareapp.transport.model.user.UserApp;
 import co.edu.icesi.dev.uccareapp.transport.model.user.UserType;
 

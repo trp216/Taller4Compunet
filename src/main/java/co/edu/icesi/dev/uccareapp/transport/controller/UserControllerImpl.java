@@ -5,10 +5,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import co.edu.icesi.dev.uccareapp.transport.delegate.SalextaxrateDelegateImp;
 import co.edu.icesi.dev.uccareapp.transport.delegate.UserDelegate;
 import co.edu.icesi.dev.uccareapp.transport.model.user.UserApp;
-import co.edu.icesi.dev.uccareapp.transport.services.UserServiceImpl;
 
 @Controller
 public class UserControllerImpl implements UserController{
@@ -20,10 +18,7 @@ public class UserControllerImpl implements UserController{
 	public UserControllerImpl(UserDelegate userDelegate) {
 		this.userDelegate = userDelegate;
 	}
-	
-//	public UserControllerImpl(UserServiceImpl userService) {
-//		this.userService = userService;
-//	}
+
 	
 	@GetMapping("/users/del/{id}")
 	public String deleteUser(@PathVariable("id") long id, Model model) {

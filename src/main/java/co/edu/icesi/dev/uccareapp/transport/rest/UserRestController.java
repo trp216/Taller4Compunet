@@ -27,7 +27,6 @@ public class UserRestController {
 		try {
 			userService.save(user);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

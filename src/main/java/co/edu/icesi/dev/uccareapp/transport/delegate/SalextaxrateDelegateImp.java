@@ -27,20 +27,17 @@ public class SalextaxrateDelegateImp implements SalestaxrateDelegate{
 
 	@Override
 	public Salestaxrate findById(Integer id) {
-		// TODO Auto-generated method stub
 		return rest.getForObject(PATH+id, Salestaxrate.class);
 	}
 
 	@Override
 	public Iterable<Salestaxrate> findAll() {
-		// TODO Auto-generated method stub
 		Salestaxrate[] strs = rest.getForObject(PATH, Salestaxrate[].class);
 		return Arrays.asList(strs);
 	}
 
 	@Override
 	public void save(Salestaxrate str) {
-		// TODO Auto-generated method stub
 		rest.postForEntity(PATH, str, Salestaxrate.class);
 	}
 	

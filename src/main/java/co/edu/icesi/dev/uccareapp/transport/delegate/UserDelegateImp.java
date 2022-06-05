@@ -21,46 +21,39 @@ public class UserDelegateImp implements UserDelegate{
 
 	@Override
 	public void save(UserApp user) {
-		// TODO Auto-generated method stub
 		rest.postForEntity(PATH, user, UserApp.class);
 	}
 
 	@Override
 	public UserApp findById(long id) {
-		// TODO Auto-generated method stub
 		return rest.getForObject(PATH+id, UserApp.class);
 	}
 
 	@Override
 	public Iterable<UserApp> findAll() {
-		// TODO Auto-generated method stub
 		UserApp[] users = rest.getForObject(PATH, UserApp[].class);
 		return Arrays.asList(users);
 	}
 
 	@Override
 	public Iterable<UserApp> findAllAdmins() {
-		// TODO Auto-generated method stub
 		UserApp[] users = rest.getForObject(PATH+"admins/", UserApp[].class);
 		return Arrays.asList(users);
 	}
 
 	@Override
 	public Iterable<UserApp> findAllOperators() {
-		// TODO Auto-generated method stub
 		UserApp[] users = rest.getForObject(PATH+"operators/", UserApp[].class);
 		return Arrays.asList(users);
 	}
 
 	@Override
 	public void delete(UserApp user) {
-		// TODO Auto-generated method stub
 		rest.delete(PATH+ user.getId());
 	}
 
 	@Override
 	public UserType[] getTypes() {
-		// TODO Auto-generated method stub
 		return rest.getForObject(PATH+"types/", UserType[].class);
 	}
 

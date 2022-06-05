@@ -28,20 +28,17 @@ public class AddressDelegateImp implements AddressDelegate{
 
 	@Override
 	public Iterable<Address> findAll() {
-		// TODO Auto-generated method stub
 		Address[] ads = rest.getForObject(PATH, Address[].class);
 		return Arrays.asList(ads);
 	}
 
 	@Override
 	public void save(Address address) {
-		// TODO Auto-generated method stub
 		rest.postForEntity(PATH, address, Address.class);
 	}
 
 	@Override
 	public Address findById(Integer id) {
-		// TODO Auto-generated method stub
 		return rest.getForObject(PATH+id, Address.class);
 	}
 	

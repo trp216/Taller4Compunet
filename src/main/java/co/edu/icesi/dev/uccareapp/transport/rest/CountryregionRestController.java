@@ -28,7 +28,6 @@ public class CountryregionRestController {
 		try {
 			crService.save(countryregion);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -40,7 +39,6 @@ public class CountryregionRestController {
 		try {
 			return crService.edit(countryregion);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return countryregion;
 		}
