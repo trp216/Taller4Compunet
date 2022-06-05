@@ -14,6 +14,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 
+import co.edu.icesi.dev.uccareapp.transport.model.hr.Employee;
+
 /**
  * The persistent class for the person database table.
  *
@@ -51,6 +53,17 @@ public class Person implements Serializable {
 	private String suffix;
 
 	private String title;
+
+	@OneToOne
+	private Employee employee;
+
+	public Employee getEmployee() {
+		return employee;
+	}
+
+	public void setEmployee(Employee employee) {
+		this.employee = employee;
+	}
 
 	// bi-directional many-to-one association to Businessentitycontact
 	@OneToMany(mappedBy = "person")

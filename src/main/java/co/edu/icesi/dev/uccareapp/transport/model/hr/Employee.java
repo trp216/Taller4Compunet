@@ -11,9 +11,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
+import co.edu.icesi.dev.uccareapp.transport.model.person.Person;
 
 /**
  * The persistent class for the employee database table.
@@ -58,6 +61,17 @@ public class Employee implements Serializable {
 	private Integer sickleavehours;
 
 	private Integer vacationhours;
+
+	@OneToOne(mappedBy = "employee")
+	private Person person;
+
+	public Person getPerson() {
+		return person;
+	}
+
+	public void setPerson(Person person) {
+		this.person = person;
+	}
 
 	// bi-directional many-to-one association to Employeedepartmenthistory
 	@OneToMany(mappedBy = "employee")
