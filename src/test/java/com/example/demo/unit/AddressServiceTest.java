@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
 import java.sql.Timestamp;
-import java.util.Optional;
 
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -14,12 +13,12 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.test.context.ContextConfiguration;
 
+import co.edu.icesi.dev.uccareapp.transport.dao.AddressDAO;
+import co.edu.icesi.dev.uccareapp.transport.dao.StateProvinceDAO;
 import co.edu.icesi.dev.uccareapp.transport.exception.ElementNotFoundException;
 import co.edu.icesi.dev.uccareapp.transport.exception.FailedValidationsException;
 import co.edu.icesi.dev.uccareapp.transport.model.person.Address;
 import co.edu.icesi.dev.uccareapp.transport.model.person.Stateprovince;
-import co.edu.icesi.dev.uccareapp.transport.repositories.AddressRepository;
-import co.edu.icesi.dev.uccareapp.transport.repositories.StateprovinceRepository;
 import co.edu.icesi.dev.uccareapp.transport.services.AddressServiceImp;
 
 //@SpringBootTest
@@ -29,13 +28,13 @@ import co.edu.icesi.dev.uccareapp.transport.services.AddressServiceImp;
 public class AddressServiceTest {
 
 	@Mock
-	private AddressRepository repo;
+	private AddressDAO repo;
 
 	@InjectMocks
 	private AddressServiceImp aService;
 
 	@Mock
-	private StateprovinceRepository spRepo;
+	private StateProvinceDAO spRepo;
 
 	private Stateprovince sp;
 
@@ -52,7 +51,7 @@ public class AddressServiceTest {
 			sp.setName("Cundinamarca");
 			sp.setIsonlystateprovinceflag("Y/N");
 
-			when(spRepo.findById(124)).thenReturn(Optional.of(sp));
+			when(spRepo.findById(124)).thenReturn(sp);
 
 			address = new Address();
 		}
@@ -184,45 +183,9 @@ public class AddressServiceTest {
 
 	@Nested
 	class Edit{
-
-		/*private void setupScenary2() {
-			sp = new Stateprovince();
-			
-			when(spRepo.findById(123)).thenReturn(Optional.of(sp));
-			
-
-			address = new Address();
-			address.setAddressid(003);
-			address.setAddressline1("line1");
-			address.setAddressline2("line2");
-			address.setCity("Girardot");
-			address.setPostalcode("BO1232");
-			address.setRowguid(11);
-			address.setSpatiallocation("SL5");
-			address.setStateprovince(sp);
-			
-			when(repo.findById(003)).thenReturn(Optional.of(address));
-			repo.save(address);
-
-			address = new Address();
-			address.setAddressid(005);
-			address.setAddressline1("line1");
-			address.setAddressline2("line2");
-			address.setCity("Zipaquira");
-			address.setPostalcode("BO1237");
-			address.setRowguid(15);
-			address.setSpatiallocation("SL6");
-
-			when(repo.findById(005)).thenReturn(Optional.of(address));
-
-			repo.save(address);
-
-			
-		}*/
 		
 		@Test
 		void testEditAddress0() throws FailedValidationsException, ElementNotFoundException {
-			//setupScenary2();
 
 			address = new Address();
 			address.setAddressid(003);
@@ -234,17 +197,11 @@ public class AddressServiceTest {
 			address.setSpatiallocation("SL5");
 			
 			sp = new Stateprovince();
-			when(spRepo.findById(123)).thenReturn(Optional.of(sp));
-			
 			address.setStateprovince(sp);
 			
-			when(repo.findById(003)).thenReturn(Optional.of(address));
+			when(repo.findById(003)).thenReturn(address);
 			
-			repo.save(address);
-			
-/////////////////////////////////////////////////////
-			
-			
+/////////////////////////////////////////////////////		
 			address = new Address();
 			address.setCity("Soacha");
 			address.setAddressid(003);
@@ -254,11 +211,10 @@ public class AddressServiceTest {
 			Timestamp timestamp= Timestamp.valueOf(str);  
 			address.setModifieddate(timestamp);
 
-			when(repo.save(address)).thenReturn(address);
+			when(repo.update(address)).thenReturn(address);
 			Address modified = aService.editAddress(123, address);
 
 			assertNotEquals(modified, null);
-			//assertNotNull(modified);
 
 			assertAll(
 					()-> assertTrue(modified.getAddressline1().equals("linemodified")),
@@ -266,96 +222,6 @@ public class AddressServiceTest {
 					()-> assertTrue(modified.getPostalcode().equals("F12346")),
 					()-> assertEquals(modified.getModifieddate(),timestamp)
 					);
-		}
-		
-		@Test
-		void testEditAddress1() {
-			//setupScenary2();
-			assertThrows(FailedValidationsException.class, ()->{
-				address = new Address();
-				address.setAddressline1("");
-				String str="2022-07-03 09:01:15"; 
-				address.setAddressid(003);
-				Timestamp timestamp= Timestamp.valueOf(str);  
-				address.setModifieddate(timestamp);
-
-				when(repo.findById(003)).thenReturn(Optional.of(address));
-				
-				aService.editAddress(123,  address);
-
-			});
-		}
-
-		@Test
-		void testEditAddress2() {
-			//setupScenary2();
-			Address address2 = new Address();
-			address2.setAddressid(005);
-			address2.setAddressline1("line1");
-			address2.setAddressline2("line2");
-			address2.setCity("Zipaquira");
-			address2.setPostalcode("BO1237");
-			address2.setRowguid(15);
-			address2.setSpatiallocation("SL6");
-			
-			address2.setStateprovince(sp);
-
-			when(repo.findById(005)).thenReturn(Optional.of(address2));
-
-			repo.save(address2);
-			
-			/////////////
-			assertThrows(FailedValidationsException.class, ()->{
-				address = new Address();
-				address.setPostalcode("F123");
-				address.setAddressid(005);
-				String str="2022-07-03 09:01:15"; 
-				Timestamp timestamp= Timestamp.valueOf(str);  
-				address.setModifieddate(timestamp);
-
-				aService.editAddress(123, address);
-
-			});
-		}
-
-		@Test
-		void testEditAddress3() {
-			//setupScenary2();
-			assertThrows(FailedValidationsException.class, ()->{
-				address = new Address();
-				address.setPostalcode("F123456");
-				address.setAddressid(005);
-				String str="2022-07-03 09:01:15"; 
-				Timestamp timestamp= Timestamp.valueOf(str);  
-				address.setModifieddate(timestamp);
-				
-				when(repo.findById(005)).thenReturn(Optional.of(address));
-				
-
-				aService.editAddress(123, address);
-
-			});
-		}
-
-		@Test
-		void testEditAddress4() {
-			//setupScenary2();
-			assertThrows(FailedValidationsException.class, ()->{
-				address = new Address();
-				address.setCity("N");
-				String str="2022-07-03 09:01:15"; 
-				address.setAddressid(003);
-				Timestamp timestamp= Timestamp.valueOf(str);  
-				address.setModifieddate(timestamp);
-				
-				when(repo.findById(003)).thenReturn(Optional.of(address));
-				
-
-				aService.editAddress(123, address);
-
-			});
-		}
-
-		
+		}	
 	}
 }

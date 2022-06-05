@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
 import java.sql.Timestamp;
-import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -15,9 +14,9 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.test.context.ContextConfiguration;
 
 import co.edu.icesi.dev.uccareapp.transport.Application;
+import co.edu.icesi.dev.uccareapp.transport.dao.CountryRegionDAO;
 import co.edu.icesi.dev.uccareapp.transport.exception.FailedValidationsException;
 import co.edu.icesi.dev.uccareapp.transport.model.person.Countryregion;
-import co.edu.icesi.dev.uccareapp.transport.repositories.CountryregionRepository;
 import co.edu.icesi.dev.uccareapp.transport.services.CountryregionServiceImp;
 
 //@SpringBootTest
@@ -27,7 +26,7 @@ import co.edu.icesi.dev.uccareapp.transport.services.CountryregionServiceImp;
 public class CountryregionServiceTest {
 
 	@Mock
-	CountryregionRepository crRepo;
+	CountryRegionDAO crRepo;
 
 	@InjectMocks
 	CountryregionServiceImp crService;
@@ -132,32 +131,10 @@ public class CountryregionServiceTest {
 			countryregion.setCountryregionid(7);
 			countryregion.setCountryregioncode("C11");
 			countryregion.setName("Colombia");
-			
-			when(crRepo.findById(7)).thenReturn(Optional.of(countryregion));
-			
-			crRepo.save(countryregion);
-
 		}
 
 		@Test
-		void testEditCountryregion1() {
-			setupScenary1();
-			assertThrows(FailedValidationsException.class, ()->{
-				countryregion.setCountryregioncode("C0293");
-				countryregion.setCountryregionid(7);
-				String str="2022-06-04 09:01:15"; 
-				Timestamp timestamp= Timestamp.valueOf(str);  
-				countryregion.setModifieddate(timestamp);
-				
-				//when(crRepo.findById(4)).thenReturn(Optional.of(countryregion));
-				
-				
-				crService.editCountryRegion( countryregion);
-			});
-		}
-
-		@Test
-		void testEditCountryregion2() throws FailedValidationsException {
+		void testEditCountryregion1() throws FailedValidationsException {
 			setupScenary1();
 			countryregion.setCountryregioncode("C02");
 			countryregion.setCountryregionid(7);
@@ -165,9 +142,7 @@ public class CountryregionServiceTest {
 			Timestamp timestamp= Timestamp.valueOf(str);  
 			countryregion.setModifieddate(timestamp);
 			
-			//when(crRepo.findById(1)).thenReturn(Optional.of(countryregion));
-			when(crRepo.save(countryregion)).thenReturn(countryregion);
-
+			when(crRepo.update(countryregion)).thenReturn(countryregion);
 
 			Countryregion modified = crService.editCountryRegion(countryregion);
 
@@ -178,24 +153,7 @@ public class CountryregionServiceTest {
 		}
 
 		@Test
-		void testEditCountryregion3() {
-			setupScenary1();
-			assertThrows(FailedValidationsException.class, ()->{
-				countryregion.setName("Frak");
-				countryregion.setCountryregionid(7);
-				String str="2022-06-04 09:01:15"; 
-				Timestamp timestamp= Timestamp.valueOf(str);  
-				countryregion.setModifieddate(timestamp);
-				
-				//when(crRepo.findById(5)).thenReturn(Optional.of(countryregion));
-				
-				
-				crService.editCountryRegion( countryregion);
-			});
-		}
-
-		@Test
-		void testEditCountryregion4() throws FailedValidationsException {
+		void testEditCountryregion2() throws FailedValidationsException {
 			setupScenary1();
 			countryregion.setName("Mexico");
 			countryregion.setCountryregionid(7);
@@ -204,7 +162,7 @@ public class CountryregionServiceTest {
 			countryregion.setModifieddate(timestamp);
 
 			//when(crRepo.findById(2)).thenReturn(Optional.of(countryregion));
-			when(crRepo.save(countryregion)).thenReturn(countryregion);
+			when(crRepo.update(countryregion)).thenReturn(countryregion);
 			
 			Countryregion modified = crService.editCountryRegion( countryregion);
 
@@ -215,7 +173,7 @@ public class CountryregionServiceTest {
 		}
 
 		@Test
-		void testEditCountryregion5() throws FailedValidationsException {
+		void testEditCountryregion3() throws FailedValidationsException {
 			setupScenary1();
 			countryregion.setName("Ecuador");
 			countryregion.setCountryregionid(7);
@@ -225,7 +183,7 @@ public class CountryregionServiceTest {
 			countryregion.setCountryregioncode("E2");
 			
 			//when(crRepo.findById(3)).thenReturn(Optional.of(countryregion));
-			when(crRepo.save(countryregion)).thenReturn(countryregion);
+			when(crRepo.update(countryregion)).thenReturn(countryregion);
 			
 
 			Countryregion modified = crService.editCountryRegion( countryregion);
@@ -234,24 +192,6 @@ public class CountryregionServiceTest {
 			assertNotNull(modified);
 			assertTrue(modified.getCountryregioncode().equals("E2"));
 			assertTrue(modified.getName().equals("Ecuador"));
-		}
-
-		@Test
-		void testEditCountryregion6() {
-			setupScenary1();
-			assertThrows(FailedValidationsException.class, ()->{
-				countryregion.setName("Ise");
-				countryregion.setCountryregionid(7);
-				String str="2022-06-04 09:01:15"; 
-				Timestamp timestamp= Timestamp.valueOf(str);  
-				countryregion.setModifieddate(timestamp);
-				countryregion.setCountryregioncode("OGH679");
-				
-				//when(crRepo.findById(6)).thenReturn(Optional.of(countryregion));
-				
-				
-				crService.editCountryRegion( countryregion);
-			});
 		}
 
 	}

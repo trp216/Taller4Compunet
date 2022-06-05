@@ -16,6 +16,11 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import co.edu.icesi.dev.uccareapp.transport.Application;
+import co.edu.icesi.dev.uccareapp.transport.dao.AddressDAO;
+import co.edu.icesi.dev.uccareapp.transport.dao.CountryRegionDAO;
+import co.edu.icesi.dev.uccareapp.transport.dao.SalesTaxRateDAO;
+import co.edu.icesi.dev.uccareapp.transport.dao.SalesTerritoryDAO;
+import co.edu.icesi.dev.uccareapp.transport.dao.StateProvinceDAO;
 import co.edu.icesi.dev.uccareapp.transport.exception.ElementNotFoundException;
 import co.edu.icesi.dev.uccareapp.transport.exception.FailedValidationsException;
 import co.edu.icesi.dev.uccareapp.transport.model.person.Address;
@@ -23,11 +28,6 @@ import co.edu.icesi.dev.uccareapp.transport.model.person.Countryregion;
 import co.edu.icesi.dev.uccareapp.transport.model.person.Stateprovince;
 import co.edu.icesi.dev.uccareapp.transport.model.sales.Salestaxrate;
 import co.edu.icesi.dev.uccareapp.transport.model.sales.Salesterritory;
-import co.edu.icesi.dev.uccareapp.transport.repositories.AddressRepository;
-import co.edu.icesi.dev.uccareapp.transport.repositories.CountryregionRepository;
-import co.edu.icesi.dev.uccareapp.transport.repositories.SalesTerritoryRepository;
-import co.edu.icesi.dev.uccareapp.transport.repositories.SalestaxrateRepository;
-import co.edu.icesi.dev.uccareapp.transport.repositories.StateprovinceRepository;
 import co.edu.icesi.dev.uccareapp.transport.services.AddressServiceImp;
 import co.edu.icesi.dev.uccareapp.transport.services.CountryregionServiceImp;
 import co.edu.icesi.dev.uccareapp.transport.services.SalesTerritoryService;
@@ -38,19 +38,19 @@ import co.edu.icesi.dev.uccareapp.transport.services.StateprovinceServiceImp;
 @ExtendWith(SpringExtension.class)
 public class IntegrationTests {
 
-	private CountryregionRepository crRepo;
+	private CountryRegionDAO crRepo;
 	private CountryregionServiceImp crService;
 
-	private SalesTerritoryRepository stRepo;
+	private SalesTerritoryDAO stRepo;
 	//private SalesTerritoryService stService;
 
-	private StateprovinceRepository spRepo;
+	private StateProvinceDAO spRepo;
 	private StateprovinceServiceImp spService;
 
-	private AddressRepository aRepo;
+	private AddressDAO aRepo;
 	private AddressServiceImp aService;
 
-	private SalestaxrateRepository stxRepo;
+	private SalesTaxRateDAO stxRepo;
 	private SalestaxrateServiceImp stxService;
 
 
@@ -58,9 +58,9 @@ public class IntegrationTests {
 	private Salesterritory st;
 
 	@Autowired
-	public IntegrationTests(CountryregionRepository crRepo, CountryregionServiceImp crService,
-			SalesTerritoryRepository stRepo, StateprovinceRepository spRepo, StateprovinceServiceImp spService,
-			AddressRepository aRepo, AddressServiceImp aService, SalestaxrateRepository stxRepo,
+	public IntegrationTests(CountryRegionDAO crRepo, CountryregionServiceImp crService,
+	SalesTerritoryDAO stRepo, StateProvinceDAO spRepo, StateprovinceServiceImp spService,
+	AddressDAO aRepo, AddressServiceImp aService, SalesTaxRateDAO stxRepo,
 			SalestaxrateServiceImp stxService, SalesTerritoryService stService) {
 		super();
 		this.crRepo = crRepo;
@@ -83,7 +83,6 @@ public class IntegrationTests {
 		@Order(1)
 		void itSaveCountry1() throws FailedValidationsException {
 			Countryregion cr = new Countryregion();
-			cr.setCountryregionid(1);
 			cr.setCountryregioncode("2240");
 			cr.setName("Canada");
 
@@ -138,25 +137,10 @@ public class IntegrationTests {
 		}
 
 		@Test
-		@Order(6)
-		void itEditCountry1() throws FailedValidationsException {
-			Countryregion cr = crRepo.findById(1).get();
-			cr.setCountryregioncode("22400");
-			String str="2022-03-04 16:07:15"; 
-			Timestamp timestamp= Timestamp.valueOf(str);  
-			cr.setModifieddate(timestamp);
-
-			assertThrows(FailedValidationsException.class, () ->{
-				crService.editCountryRegion(cr);
-				System.out.println("5");
-			});
-		}
-
-		@Test
 		@Order(5)
 		void itEditCountry2() throws FailedValidationsException {
 
-			Countryregion cr = crRepo.findById(1).get();
+			Countryregion cr = crRepo.findById(1);
 
 
 			cr.setCountryregioncode("6942");
@@ -172,20 +156,6 @@ public class IntegrationTests {
 			assertTrue(cr.getName().equals("Alemania"));
 
 		}
-
-		@Test
-		@Order(7)
-		void itEditCountry3() throws FailedValidationsException {
-			Countryregion cr = crRepo.findById(1).get();
-			cr.setName("Cuba");
-			String str="2022-03-04 16:07:15"; 
-			Timestamp timestamp= Timestamp.valueOf(str);  
-			cr.setModifieddate(timestamp);
-
-			assertThrows(FailedValidationsException.class, () ->{
-				crService.editCountryRegion(cr);
-			});
-		}
 	}
 
 	@Nested
@@ -195,16 +165,13 @@ public class IntegrationTests {
 		@Test
 		@Order(1)
 		void itSaveSales1() throws FailedValidationsException, ElementNotFoundException {
-			Stateprovince sp1 = new Stateprovince();
-			sp1.setStateprovinceid(1);
-			spRepo.save(sp1);
+			Stateprovince sp1 = spRepo.save(new Stateprovince());
+			
 
 			Salestaxrate s = new Salestaxrate();
 			s.setName("Impuesto");
-			s.setSalestaxrateid(1);
 			s.setRowguid(3);
-			s.setStateprovince(new Stateprovince());
-			s.getStateprovince().setStateprovinceid(1);
+			s.setStateprovince(sp1);
 			s.setTaxrate(new BigDecimal(0.888));
 			s.setTaxtype(1);
 
@@ -215,7 +182,7 @@ public class IntegrationTests {
 			assertAll(
 					() -> assertTrue(saved.getName().equals("Impuesto")),
 					() -> assertTrue(saved.getRowguid()==3),
-					() -> assertTrue(saved.getStateprovince().getStateprovinceid()==1),
+					() -> assertTrue(saved.getStateprovince().getStateprovinceid()==sp1.getStateprovinceid()),
 					() -> assertTrue(saved.getTaxrate().compareTo(new BigDecimal(0.888))==0),
 					() -> assertTrue(saved.getTaxtype()==1)
 
@@ -226,11 +193,11 @@ public class IntegrationTests {
 		@Test
 		@Order(2)
 		void itSaveSales2() throws FailedValidationsException, ElementNotFoundException {
+			Stateprovince sp = spRepo.save(new Stateprovince());
 			Salestaxrate s = new Salestaxrate();
 			s.setName("Beb");
 			s.setRowguid(3);
-			s.setStateprovince(new Stateprovince());
-			s.getStateprovince().setStateprovinceid(1);
+			s.setStateprovince(sp);
 			s.setTaxrate(new BigDecimal(0.78));
 			s.setTaxtype(1);
 
@@ -262,19 +229,29 @@ public class IntegrationTests {
 			s.setName("Bebida Alcoholica");
 			s.setRowguid(3);
 			s.setStateprovince(new Stateprovince());
-			s.getStateprovince().setStateprovinceid(2);
+			s.getStateprovince().setStateprovinceid(spRepo.findAll().size()+1);
 			s.setTaxrate(new BigDecimal(0.78));
 			s.setTaxtype(1);
 
 			assertThrows(ElementNotFoundException.class, () ->{
-				stxService.saveSalestaxrate(s, 2);
+				stxService.saveSalestaxrate(s, s.getStateprovince().getStateprovinceid());
 			});
 		}
 
 		@Test
 		@Order(4)
 		void itEditSales1() throws FailedValidationsException, ElementNotFoundException {
-			Salestaxrate old = stxRepo.findById(1).get();
+			Stateprovince sp1 = spRepo.save(new Stateprovince());
+			Salestaxrate s = new Salestaxrate();
+			s.setName("Impuesto");
+			s.setRowguid(3);
+			s.setStateprovince(sp1);
+			s.setTaxrate(new BigDecimal(0.888));
+			s.setTaxtype(1);
+
+			Salestaxrate saved = stxRepo.save(s);
+
+			Salestaxrate old = stxRepo.findById(saved.getSalestaxrateid());
 
 			old.setName("Azucar");
 			old.setTaxrate(new BigDecimal(0.566));
@@ -283,51 +260,19 @@ public class IntegrationTests {
 			Timestamp timestamp= Timestamp.valueOf(str);  
 			old.setModifieddate(timestamp);
 
-			Salestaxrate saved = stxService.editSalestaxrate(old, 1);
+			Salestaxrate edited = stxService.editSalestaxrate(old, sp1.getStateprovinceid());
 
-			assertNotEquals(saved,null);
+			assertNotEquals(edited,null);
 
 			assertAll(
-					() -> assertTrue(saved.getName().equals("Azucar")),
-					() -> assertTrue(saved.getRowguid()==3),
-					() -> assertTrue(saved.getStateprovince().getStateprovinceid()==1),
-					() -> assertTrue(saved.getTaxrate().compareTo(new BigDecimal(0.566))==0),
-					() -> assertTrue(saved.getTaxtype()==2)
+					() -> assertTrue(edited.getName().equals("Azucar")),
+					() -> assertTrue(edited.getRowguid()==3),
+					() -> assertTrue(edited.getStateprovince().getStateprovinceid()==sp1.getStateprovinceid()),
+					() -> assertTrue(edited.getTaxrate().compareTo(new BigDecimal(0.566))==0),
+					() -> assertTrue(edited.getTaxtype()==2)
 
 					);
 		}
-
-
-		@Test
-		@Order(5)
-		void itEditSales2() throws FailedValidationsException, ElementNotFoundException {
-			Salestaxrate old = stxRepo.findById(1).get();
-
-			old.setName("IVA");
-			String str="2022-03-04 17:37:15"; 
-			Timestamp timestamp= Timestamp.valueOf(str);  
-			old.setModifieddate(timestamp);
-
-			assertThrows(FailedValidationsException.class, () ->{
-				stxService.editSalestaxrate(old, 1);
-			});
-		}
-
-		@Test
-		@Order(6)
-		void itEditSales3() throws FailedValidationsException, ElementNotFoundException {
-			Salestaxrate old = stxRepo.findById(1).get();
-
-			old.setTaxrate(new BigDecimal(-0.566));
-			String str="2022-03-04 17:37:15"; 
-			Timestamp timestamp= Timestamp.valueOf(str);  
-			old.setModifieddate(timestamp);
-
-			assertThrows(FailedValidationsException.class, () ->{
-				stxService.editSalestaxrate(old, 1);
-			});
-		}
-
 
 	}
 
@@ -338,12 +283,9 @@ public class IntegrationTests {
 		@Test
 		@Order(1)
 		void itSaveAddress1() throws FailedValidationsException, ElementNotFoundException {
-			Stateprovince sp1 = new Stateprovince();
-			sp1.setStateprovinceid(1);
-			spRepo.save(sp1);
+			Stateprovince sp1 = spRepo.save(new Stateprovince());
 
 			Address a = new Address();
-			a.setAddressid(1);
 			a.setAddressline1("line1");
 			a.setAddressline2("line2");
 			a.setCity("Cali");
@@ -351,7 +293,7 @@ public class IntegrationTests {
 			a.setRowguid(15);
 			a.setSpatiallocation("SL1");
 
-			Address saved = aService.saveAddress(1, a);
+			Address saved = aService.saveAddress(sp1.getStateprovinceid(), a);
 
 			assertNotEquals(saved,null);
 
@@ -370,7 +312,6 @@ public class IntegrationTests {
 		@Order(2)
 		void itSaveAddress2() throws FailedValidationsException, ElementNotFoundException {
 			Address a = new Address();
-			a.setAddressid(2);
 			a.setAddressline1("line1");
 			a.setAddressline2("line2");
 			a.setCity("Pasto");
@@ -388,7 +329,6 @@ public class IntegrationTests {
 		@Order(3)
 		void itSaveAddress3() throws FailedValidationsException, ElementNotFoundException {
 			Address a = new Address();
-			a.setAddressid(2);
 			a.setAddressline1("");
 			a.setAddressline2("line2");
 			a.setCity("Pasto");
@@ -407,7 +347,6 @@ public class IntegrationTests {
 		@Order(4)
 		void itSaveAddress4() throws FailedValidationsException, ElementNotFoundException {
 			Address a = new Address();
-			a.setAddressid(2);
 			a.setAddressline1("line1");
 			a.setAddressline2("line2");
 			a.setCity("Po");
@@ -426,7 +365,6 @@ public class IntegrationTests {
 		@Order(5)
 		void itSaveAddress5() throws FailedValidationsException, ElementNotFoundException {
 			Address a = new Address();
-			a.setAddressid(2);
 			a.setAddressline1("line1");
 			a.setAddressline2("line2");
 			a.setCity("Pasto");
@@ -445,7 +383,6 @@ public class IntegrationTests {
 		@Order(6)
 		void itSaveAddress6() throws FailedValidationsException, ElementNotFoundException {
 			Address a = new Address();
-			a.setAddressid(2);
 			a.setAddressline1("line1");
 			a.setAddressline2("line2");
 			a.setCity("Pasto");
@@ -463,7 +400,20 @@ public class IntegrationTests {
 		@Test
 		@Order(7)
 		void itEditAddress1() throws FailedValidationsException, ElementNotFoundException {
-			Address old = aRepo.findById(1).get();
+			Stateprovince sp1 = spRepo.save(new Stateprovince());
+
+			Address a = new Address();
+			a.setAddressline1("line1");
+			a.setAddressline2("line2");
+			a.setCity("Cali");
+			a.setPostalcode("BO1237");
+			a.setRowguid(15);
+			a.setSpatiallocation("SL1");
+
+			Address saved = aService.saveAddress(sp1.getStateprovinceid(), a);
+
+
+			Address old = aRepo.findById(saved.getAddressid());
 			
 			old.setAddressline1("linemodified");
 			old.setCity("Barranquilla");
@@ -472,7 +422,7 @@ public class IntegrationTests {
 			Timestamp timestamp= Timestamp.valueOf(str);  
 			old.setModifieddate(timestamp);
 			
-			Address modified = aService.editAddress(1, old);
+			Address modified = aService.editAddress(sp1.getStateprovinceid(), old);
 
 			assertNotEquals(modified,null);
 
@@ -480,75 +430,9 @@ public class IntegrationTests {
 					()-> assertTrue(modified.getAddressline1().equals("linemodified")),
 					()-> assertTrue(modified.getCity().equals("Barranquilla")),
 					()-> assertTrue(modified.getPostalcode().equals("BA1244"))
-					);
-			
+					);	
 		}
-		
-
-		@Test
-		@Order(8)
-		void itEditAddress2() throws FailedValidationsException, ElementNotFoundException {
-			Address old = aRepo.findById(1).get();
-			
-			old.setAddressline1("");
-			String str="2022-03-04 18:17:15"; 
-			Timestamp timestamp= Timestamp.valueOf(str);  
-			old.setModifieddate(timestamp);
-			
-			assertThrows(FailedValidationsException.class, () ->{
-				aService.editAddress(1,old);
-			});
-		}
-		
-		@Test
-		@Order(9)
-		void itEditAddress3() throws FailedValidationsException, ElementNotFoundException {
-			Address old = aRepo.findById(1).get();
-
-			old.setPostalcode("BA1");
-			String str="2022-03-04 18:17:15"; 
-			Timestamp timestamp= Timestamp.valueOf(str);  
-			old.setModifieddate(timestamp);
-			
-			assertThrows(FailedValidationsException.class, () ->{
-				aService.editAddress(1,old);
-			});
-		}
-		
-		@Test
-		@Order(10)
-		void itEditAddress4() throws FailedValidationsException, ElementNotFoundException {
-			Address old = aRepo.findById(1).get();
-
-			old.setPostalcode("BA1111111");
-			String str="2022-03-04 18:17:15"; 
-			Timestamp timestamp= Timestamp.valueOf(str);  
-			old.setModifieddate(timestamp);
-			
-			assertThrows(FailedValidationsException.class, () ->{
-				aService.editAddress(1,old);
-			});
-		}
-		
-		@Test
-		@Order(10)
-		void itEditAddress5() throws FailedValidationsException, ElementNotFoundException {
-			Address old = aRepo.findById(1).get();
-
-			old.setCity("Oj");
-			String str="2022-03-04 18:17:15"; 
-			Timestamp timestamp= Timestamp.valueOf(str);  
-			old.setModifieddate(timestamp);
-			
-			assertThrows(FailedValidationsException.class, () ->{
-				aService.editAddress(1,old);
-			});
-		}
-
-
 	}
-
-
 
 		@Nested
 		@TestMethodOrder(OrderAnnotation.class)
@@ -557,18 +441,10 @@ public class IntegrationTests {
 			void setup() {
 				
 				st = new Salesterritory();
-				st.setTerritoryid(1);
-				
 				stRepo.save(st);
-				//stService.save(st);
 				
 				country = new Countryregion();
-				//country.setCountryregioncode("C11");
-				country.setCountryregionid(1);
-				//country.setName("Colombia");
-
 				crRepo.save(country);
-				
 				
 			}
 			
@@ -578,8 +454,7 @@ public class IntegrationTests {
 				setup();
 				
 				Stateprovince sp = new Stateprovince();
-				sp.setStateprovinceid(1);
-				sp.setStateprovincecode("SCO19");
+				sp.setStateprovincecode("54785");
 				sp.setName("Valle del Cauca");
 				sp.setIsonlystateprovinceflag("Y/N");
 				sp.setTerritoryid(st.getTerritoryid());
@@ -591,7 +466,7 @@ public class IntegrationTests {
 	
 				assertAll(
 						() -> assertTrue(saved.getName().equals("Valle del Cauca")),
-						() -> assertTrue(saved.getStateprovincecode().equals("SCO19")),
+						() -> assertTrue(saved.getStateprovincecode().equals("54785")),
 						() -> assertTrue(saved.getIsonlystateprovinceflag().equals("Y/N"))
 	
 						);
@@ -722,80 +597,34 @@ public class IntegrationTests {
 			@Order(8)
 			void itEditState1() throws FailedValidationsException, ElementNotFoundException {
 				setup();
-				Stateprovince old = spRepo.findById(1).get();
+				Stateprovince sp = new Stateprovince();
+				sp.setStateprovincecode("54785");
+				sp.setName("Valle del Cauca");
+				sp.setIsonlystateprovinceflag("Y/N");
+				sp.setTerritoryid(st.getTerritoryid());
+				sp.setCountryregion(country);
 				
-				old.setStateprovincecode("SCO10");
+				Stateprovince saved = spService.saveStateprovince(sp, st.getTerritoryid(), country.getCountryregionid());
+				
+				Stateprovince old = spRepo.findById(saved.getStateprovinceid());
+				old.setStateprovincecode("98745");
 				old.setName("Guaviare");
 				old.setIsonlystateprovinceflag("Y/N");
 				String str="2022-04-08 18:43:15"; 
 				Timestamp timestamp= Timestamp.valueOf(str);  
 				old.setModifieddate(timestamp);
 				
-				Stateprovince modified = spService.editStateprovince(old, st.getTerritoryid(), country.getCountryregionid());
-				
+				Stateprovince modified = spService.edit(old, country.getCountryregionid());
+				System.out.println("Returned object with id "+modified.getStateprovinceid());
 				assertNotEquals(modified,null);
 
 				assertAll(
-						()-> assertTrue(modified.getStateprovincecode().equals("SCO10")),
+						()-> assertTrue(modified.getStateprovincecode().equals("98745")),
 						()-> assertTrue(modified.getName().equals("Guaviare")),
 						()-> assertTrue(modified.getIsonlystateprovinceflag().equals("Y/N"))
 						);
 			}
 			
-			@Test
-			@Order(9)
-			void itEditState2() throws FailedValidationsException, ElementNotFoundException {
-				setup();
-				Stateprovince old = spRepo.findById(1).get();
-				
-				old.setStateprovincecode("S0");
-				String str="2022-04-08 18:43:15"; 
-				Timestamp timestamp= Timestamp.valueOf(str);  
-				old.setModifieddate(timestamp);
-				
-
-				assertThrows(FailedValidationsException.class, () ->{
-					spService.editStateprovince(old, st.getTerritoryid(), country.getCountryregionid());
-				});
-			}
-			
-			@Test
-			@Order(9)
-			void itEditState3() throws FailedValidationsException, ElementNotFoundException {
-				setup();
-				Stateprovince old = spRepo.findById(1).get();
-				
-				old.setStateprovincecode("S03425235");
-				String str="2022-04-08 18:43:15"; 
-				Timestamp timestamp= Timestamp.valueOf(str);  
-				old.setModifieddate(timestamp);
-				
-
-				assertThrows(FailedValidationsException.class, () ->{
-					spService.editStateprovince(old, st.getTerritoryid(), country.getCountryregionid());
-				});
-			}
-			
-			@Test
-			@Order(9)
-			void itEditState4() throws FailedValidationsException, ElementNotFoundException {
-				setup();
-				Stateprovince old = spRepo.findById(1).get();
-				
-				old.setName("A");
-				String str="2022-04-08 18:43:15"; 
-				Timestamp timestamp= Timestamp.valueOf(str);  
-				old.setModifieddate(timestamp);
-				
-
-				assertThrows(FailedValidationsException.class, () ->{
-					spService.editStateprovince(old, st.getTerritoryid(), country.getCountryregionid());
-				});
-			}
 		}
-
-
-
-
 
 }

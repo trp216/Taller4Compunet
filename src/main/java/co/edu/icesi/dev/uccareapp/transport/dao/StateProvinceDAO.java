@@ -29,7 +29,7 @@ public class StateProvinceDAO implements IStateProvinceDAO{
 
 	@Override
 	public Stateprovince update(Stateprovince entity) {
-		entityManager.merge(entity);		
+		entity = entityManager.merge(entity);		
 		return entity;
 	}
 

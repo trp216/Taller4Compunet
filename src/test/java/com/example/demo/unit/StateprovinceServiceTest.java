@@ -6,7 +6,6 @@ import static org.mockito.Mockito.when;
 
 import java.math.BigDecimal;
 import java.sql.Timestamp;
-import java.util.Optional;
 
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -16,14 +15,14 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.test.context.ContextConfiguration;
 
+import co.edu.icesi.dev.uccareapp.transport.dao.CountryRegionDAO;
+import co.edu.icesi.dev.uccareapp.transport.dao.SalesTerritoryDAO;
+import co.edu.icesi.dev.uccareapp.transport.dao.StateProvinceDAO;
 import co.edu.icesi.dev.uccareapp.transport.exception.ElementNotFoundException;
 import co.edu.icesi.dev.uccareapp.transport.exception.FailedValidationsException;
 import co.edu.icesi.dev.uccareapp.transport.model.person.Countryregion;
 import co.edu.icesi.dev.uccareapp.transport.model.person.Stateprovince;
 import co.edu.icesi.dev.uccareapp.transport.model.sales.Salesterritory;
-import co.edu.icesi.dev.uccareapp.transport.repositories.CountryregionRepository;
-import co.edu.icesi.dev.uccareapp.transport.repositories.SalesTerritoryRepository;
-import co.edu.icesi.dev.uccareapp.transport.repositories.StateprovinceRepository;
 import co.edu.icesi.dev.uccareapp.transport.services.StateprovinceServiceImp;
 
 //@SpringBootTest
@@ -34,13 +33,13 @@ import co.edu.icesi.dev.uccareapp.transport.services.StateprovinceServiceImp;
 public class StateprovinceServiceTest {
 
 	@Mock
-	private StateprovinceRepository spRepo;
+	private StateProvinceDAO spRepo;
 
 	@Mock
-	private CountryregionRepository crRepo;
+	private CountryRegionDAO crRepo;
 
 	@Mock
-	private SalesTerritoryRepository stRepo;
+	private SalesTerritoryDAO stRepo;
 
 	@InjectMocks
 	private StateprovinceServiceImp spService;
@@ -65,7 +64,7 @@ public class StateprovinceServiceTest {
 
 		//Salesterritory candy = new Salesterritory();
 		
-		when(stRepo.findById(3456)).thenReturn(Optional.of(st));
+		when(stRepo.findById(3456)).thenReturn(st);
 
 //		when(stRepo.save(st)).thenReturn(st);
 //		
@@ -85,7 +84,7 @@ public class StateprovinceServiceTest {
 
 			Countryregion kk = new Countryregion();
 			
-			when(crRepo.findById(7)).thenReturn(Optional.of(kk));
+			when(crRepo.findById(7)).thenReturn(kk);
 			
 		}
 
@@ -99,7 +98,7 @@ public class StateprovinceServiceTest {
 			cr.setCountryregionid(7);
 			cr.setName("Colombia");
 
-			when(crRepo.findById(7)).thenReturn(Optional.of(cr));
+			when(crRepo.findById(7)).thenReturn(cr);
 			
 			
 			Salesterritory st = new Salesterritory();
@@ -115,7 +114,7 @@ public class StateprovinceServiceTest {
 
 			//Salesterritory candy = new Salesterritory();
 			
-			when(stRepo.findById(3456)).thenReturn(Optional.of(st));
+			when(stRepo.findById(3456)).thenReturn(st);
 
 			
 			sp.setStateprovinceid(57450);
@@ -176,7 +175,7 @@ public class StateprovinceServiceTest {
 			Salesterritory aux = new Salesterritory();
 			aux.setTerritoryid(5555);
 			aux.setCountryregioncode("C12");
-			when(stRepo.findById(5555)).thenReturn(Optional.of(aux));
+			when(stRepo.findById(5555)).thenReturn(aux);
 			
 			sp.setTerritoryid(5555);
 
@@ -282,7 +281,7 @@ public class StateprovinceServiceTest {
 			st.setSaleslastyear(new BigDecimal(6000700));
 			st.setSalesytd(new BigDecimal(427300));
 
-			when(stRepo.findById(3456)).thenReturn(Optional.of(st));
+			when(stRepo.findById(3456)).thenReturn(st);
 
 			
 			sp.setTerritoryid(3456);
@@ -293,9 +292,9 @@ public class StateprovinceServiceTest {
 			cr.setName("Colombia");
 			sp.setCountryregion(cr);
 //
-			when(crRepo.findById(7)).thenReturn(Optional.of(cr));
+			when(crRepo.findById(7)).thenReturn(cr);
 //			
-			when(spRepo.findById(123)).thenReturn(Optional.of(sp));
+			when(spRepo.findById(123)).thenReturn(sp);
 			spRepo.save(sp);
 			
 		}
@@ -340,7 +339,7 @@ public class StateprovinceServiceTest {
 				Timestamp timestamp= Timestamp.valueOf(str);  
 				sp1.setModifieddate(timestamp);
 
-				when(spRepo.findById(123)).thenReturn(Optional.of(sp1));
+				when(spRepo.findById(123)).thenReturn(sp1);
 				
 				spService.editStateprovince(sp1, 3456,7);
 
@@ -359,7 +358,7 @@ public class StateprovinceServiceTest {
 				Timestamp timestamp= Timestamp.valueOf(str);  
 				sp1.setModifieddate(timestamp);
 				
-				when(spRepo.findById(123)).thenReturn(Optional.of(sp1));
+				when(spRepo.findById(123)).thenReturn(sp1);
 				
 
 				spService.editStateprovince(sp1, 3456,7);
@@ -379,7 +378,7 @@ public class StateprovinceServiceTest {
 				Timestamp timestamp= Timestamp.valueOf(str);  
 				sp1.setModifieddate(timestamp);
 				
-				when(spRepo.findById(123)).thenReturn(Optional.of(sp1));
+				when(spRepo.findById(123)).thenReturn(sp1);
 				
 
 				spService.editStateprovince(sp1, 3456,7);

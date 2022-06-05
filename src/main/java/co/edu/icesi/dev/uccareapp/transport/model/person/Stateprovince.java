@@ -17,11 +17,13 @@ import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 import co.edu.icesi.dev.uccareapp.transport.validation.Miracle;
+import lombok.ToString;
 
 /**
  * The persistent class for the stateprovince database table.
  *
  */
+@ToString
 @Entity
 @NamedQuery(name = "Stateprovince.findAll", query = "SELECT s FROM Stateprovince s")
 public class Stateprovince implements Serializable {

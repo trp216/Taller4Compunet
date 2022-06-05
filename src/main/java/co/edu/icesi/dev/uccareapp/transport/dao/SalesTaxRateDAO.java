@@ -22,9 +22,9 @@ public class SalesTaxRateDAO implements ISalesTaxRateDAO{
 	private EntityManager entityManager;
 	
 	@Override
-	public void save(Salestaxrate entity) {
+	public Salestaxrate save(Salestaxrate entity) {
 		entityManager.persist(entity);		
-		
+		return entity;
 	}
 
 	@Override

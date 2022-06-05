@@ -5,7 +5,6 @@ import static org.mockito.Mockito.when;
 
 import java.math.BigDecimal;
 import java.sql.Timestamp;
-import java.util.Optional;
 
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -16,12 +15,12 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.test.context.ContextConfiguration;
 
 import co.edu.icesi.dev.uccareapp.transport.Application;
+import co.edu.icesi.dev.uccareapp.transport.dao.SalesTaxRateDAO;
+import co.edu.icesi.dev.uccareapp.transport.dao.StateProvinceDAO;
 import co.edu.icesi.dev.uccareapp.transport.exception.ElementNotFoundException;
 import co.edu.icesi.dev.uccareapp.transport.exception.FailedValidationsException;
 import co.edu.icesi.dev.uccareapp.transport.model.person.Stateprovince;
 import co.edu.icesi.dev.uccareapp.transport.model.sales.Salestaxrate;
-import co.edu.icesi.dev.uccareapp.transport.repositories.SalestaxrateRepository;
-import co.edu.icesi.dev.uccareapp.transport.repositories.StateprovinceRepository;
 import co.edu.icesi.dev.uccareapp.transport.services.SalestaxrateServiceImp;
 
 //@SpringBootTest
@@ -31,13 +30,13 @@ import co.edu.icesi.dev.uccareapp.transport.services.SalestaxrateServiceImp;
 public class SalestaxrateServiceTest {
 
 	@Mock
-	private SalestaxrateRepository repo;
+	private SalesTaxRateDAO repo;
 
 	@InjectMocks
 	private SalestaxrateServiceImp strService;
 
 	@Mock
-	private StateprovinceRepository spRepo;
+	private StateProvinceDAO spRepo;
 
 	private Salestaxrate str;
 	
@@ -54,7 +53,7 @@ public class SalestaxrateServiceTest {
 			sp.setName("Arauca");
 			sp.setIsonlystateprovinceflag("Y/N");
 			
-			when(spRepo.findById(123)).thenReturn(Optional.of(sp));
+			when(spRepo.findById(123)).thenReturn(sp);
 
 			str = new Salestaxrate();
 		}
@@ -149,40 +148,8 @@ public class SalestaxrateServiceTest {
 
 	@Nested
 	class Edit{
-
-		private void setupScenary4() {
-			Stateprovince sp = new Stateprovince();
-			sp.setStateprovinceid(124);
-			sp.setStateprovincecode("SCO13");
-			sp.setName("Cundinamarca");
-			sp.setIsonlystateprovinceflag("Y/N");
-
-			when(spRepo.findById(124)).thenReturn(Optional.of(sp));
-
-		}
-
-		private void setupScenary5() {
-			setupScenary4();
-
-			str = new Salestaxrate();
-			str.setSalestaxrateid(0101);
-			str.setName("Impuesto");
-			str.setRowguid(2);
-			str.setStateprovince(new Stateprovince());
-			str.getStateprovince().setStateprovinceid(124);
-			str.setTaxrate(new BigDecimal(0.67));
-			str.setTaxtype(2);
-
-			when(repo.findById(0101)).thenReturn(Optional.of(str));
-
-			repo.save(str);
-			//when(repo.save(s)).thenReturn(s);
-		}
-		
 		@Test
 		public void testEditSalestaxrate0() throws FailedValidationsException, ElementNotFoundException {
-			setupScenary5();
-			
 			str = new Salestaxrate();
 			str.setSalestaxrateid(0101);
 			str.setName("Azucar");
@@ -192,12 +159,11 @@ public class SalestaxrateServiceTest {
 			Timestamp timestamp= Timestamp.valueOf(x); 
 			str.setModifieddate(timestamp);
 
-			when(repo.save(str)).thenReturn(str);
+			when(repo.update(str)).thenReturn(str);
 
 			Salestaxrate modified = strService.editSalestaxrate(str, 124);
 
 			assertNotEquals(modified, null);
-			//assertNotNull(modified);
 
 			assertAll(
 					() -> assertEquals(modified.getName(),"Azucar"),
@@ -208,45 +174,6 @@ public class SalestaxrateServiceTest {
 
 		}
 
-		@Test
-		public void testEditSalestaxrate1() {
-
-			//setupScenary5();
-			assertThrows(FailedValidationsException.class, ()->{
-				str = new Salestaxrate();
-				str.setName("IVA");
-				str.setSalestaxrateid(0101);
-				String x="2022-07-03 09:01:15"; 
-				Timestamp timestamp= Timestamp.valueOf(x); 
-				str.setModifieddate(timestamp);
-
-				when(repo.findById(0101)).thenReturn(Optional.of(str));
-				
-				strService.editSalestaxrate(str, 124);
-
-			});
-		}
-
-		@Test
-		public void testEditSalestaxrate2() {
-			//setupScenary5();
-			assertThrows(FailedValidationsException.class, ()->{
-				str = new Salestaxrate();
-				str.setTaxrate(new BigDecimal(-0.566));
-				String x="2022-07-03 09:01:15";
-				str.setSalestaxrateid(0101);
-				Timestamp timestamp= Timestamp.valueOf(x); 
-				str.setModifieddate(timestamp);
-				
-				when(repo.findById(0101)).thenReturn(Optional.of(str));
-				
-
-				strService.editSalestaxrate(str, 124);
-
-			});
-		}
-
-		
 
 	}
 

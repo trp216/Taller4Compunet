@@ -22,11 +22,14 @@ import co.edu.icesi.dev.uccareapp.transport.model.user.UserApp;
 import co.edu.icesi.dev.uccareapp.transport.model.user.UserType;
 import co.edu.icesi.dev.uccareapp.transport.repositories.UserRepository;
 
+//Uncomment to test:
+import org.springframework.context.annotation.ComponentScan;
+
 @SpringBootApplication
 //@EnableJpaRepositories("com.example.demo.repositories")
 //@EnableAutoConfiguration
 //@EntityScan(basePackages= {"com.example.demo.model","co.edu.icesi.dev.uccareapp.transport.model.person","co.edu.icesi.dev.uccareapp.transport.model.sales", "co.edu.icesi.dev.uccareapp.transport.model.hr"})
-//@ComponentScan(basePackages = {"com.example.demo.repositories","com.example.demo.services"} )
+@ComponentScan(basePackages = {"co.edu.icesi.dev.uccareapp.transport.controller","co.edu.icesi.dev.uccareapp.transport.dao","co.edu.icesi.dev.uccareapp.transport.delegate","co.edu.icesi.dev.uccareapp.transport.repositories","co.edu.icesi.dev.uccareapp.transport.rest","co.edu.icesi.dev.uccareapp.transport.services","co.edu.icesi.dev.uccareapp.transport.validation"} )
 public class Application {
 
 	@Bean
