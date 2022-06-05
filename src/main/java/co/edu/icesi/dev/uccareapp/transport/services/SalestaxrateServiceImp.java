@@ -43,10 +43,8 @@ public class SalestaxrateServiceImp implements SalestaxrateService {
 
 	@Override
 	@Transactional
-	public void save(Salestaxrate str) {
-
-		strDAO.save(str);
-
+	public Salestaxrate save(Salestaxrate str) {
+		return strDAO.save(str);
 	}
 
 	@Override

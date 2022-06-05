@@ -175,7 +175,7 @@ public class IntegrationTests {
 			s.setTaxrate(new BigDecimal(0.888));
 			s.setTaxtype(1);
 
-			Salestaxrate saved = stxService.saveSalestaxrate(s, 1);
+			Salestaxrate saved = stxService.save(s);
 
 			assertNotEquals(saved,null);
 
@@ -190,53 +190,6 @@ public class IntegrationTests {
 
 		}
 
-		@Test
-		@Order(2)
-		void itSaveSales2() throws FailedValidationsException, ElementNotFoundException {
-			Stateprovince sp = spRepo.save(new Stateprovince());
-			Salestaxrate s = new Salestaxrate();
-			s.setName("Beb");
-			s.setRowguid(3);
-			s.setStateprovince(sp);
-			s.setTaxrate(new BigDecimal(0.78));
-			s.setTaxtype(1);
-
-			assertThrows(FailedValidationsException.class, () ->{
-				stxService.saveSalestaxrate(s, 1);
-			});
-		}
-
-		@Test
-		@Order(3)
-		void itSaveSales3() throws FailedValidationsException, ElementNotFoundException {
-			Salestaxrate s = new Salestaxrate();
-			s.setName("Bebida Alcoholica");
-			s.setRowguid(3);
-			s.setStateprovince(new Stateprovince());
-			s.getStateprovince().setStateprovinceid(1);
-			s.setTaxrate(new BigDecimal(-0.78));
-			s.setTaxtype(1);
-
-			assertThrows(FailedValidationsException.class, () ->{
-				stxService.saveSalestaxrate(s, 1);
-			});
-		}
-
-		@Test
-		@Order(3)
-		void itSaveSales4() throws FailedValidationsException, ElementNotFoundException {
-			Salestaxrate s = new Salestaxrate();
-			s.setName("Bebida Alcoholica");
-			s.setRowguid(3);
-			s.setStateprovince(new Stateprovince());
-			s.getStateprovince().setStateprovinceid(spRepo.findAll().size()+1);
-			s.setTaxrate(new BigDecimal(0.78));
-			s.setTaxtype(1);
-
-			assertThrows(ElementNotFoundException.class, () ->{
-				stxService.saveSalestaxrate(s, s.getStateprovince().getStateprovinceid());
-			});
-		}
 
 		@Test
 		@Order(4)

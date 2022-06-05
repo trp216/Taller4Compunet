@@ -16,5 +16,5 @@ public interface SalestaxrateService {
 
 	public Iterable<Salestaxrate> findAll();
 	
-	public void save(Salestaxrate str);
+	public Salestaxrate save(Salestaxrate str);
 }
