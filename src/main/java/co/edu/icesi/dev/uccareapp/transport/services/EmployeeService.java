@@ -7,4 +7,5 @@ public interface EmployeeService {
     public Employee edit(Employee e);
     public Iterable<Employee> findAll();
     public Employee findById(Integer id);
+    public Employee findByPersonId(Integer personId);
 }

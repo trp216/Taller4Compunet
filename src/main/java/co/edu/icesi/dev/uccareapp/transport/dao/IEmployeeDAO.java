@@ -10,4 +10,5 @@ public interface IEmployeeDAO {
     void delete(Employee entity);
     Employee findById(Integer id);
     List<Employee> findAll();
+    Employee findByPersonId(Integer personId);
 }

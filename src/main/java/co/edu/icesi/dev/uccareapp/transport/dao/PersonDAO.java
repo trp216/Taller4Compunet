@@ -47,7 +47,7 @@ public class PersonDAO implements IPersonDAO{
     }
     
     public Person findByEmployeeId(Integer employeeID){
-        String jpql = "Select p from Person p, Employee e Where p.employeeid = "+employeeID;
+        String jpql = "Select p from Person p Where p.employeeId = "+employeeID;
         TypedQuery<Person> ret = em.createQuery(jpql, Person.class);
         if(ret.getResultList().isEmpty()){
             return null;

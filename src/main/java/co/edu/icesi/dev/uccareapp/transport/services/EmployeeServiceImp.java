@@ -38,4 +38,8 @@ public class EmployeeServiceImp implements EmployeeService{
         return dao.findById(id);
     }
 
+    @Override
+    public Employee findByPersonId(Integer personId){
+        return dao.findByPersonId(personId);
+    }
 }

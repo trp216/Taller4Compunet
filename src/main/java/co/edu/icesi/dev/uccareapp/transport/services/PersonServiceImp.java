@@ -5,19 +5,16 @@ import org.springframework.stereotype.Service;
 
 import co.edu.icesi.dev.uccareapp.transport.dao.EmployeeDAO;
 import co.edu.icesi.dev.uccareapp.transport.dao.PersonDAO;
-import co.edu.icesi.dev.uccareapp.transport.model.hr.Employee;
 import co.edu.icesi.dev.uccareapp.transport.model.person.Person;
 
 @Service
 public class PersonServiceImp implements PersonService{
     
     private PersonDAO dao;
-    private EmployeeDAO eDao;
 
     @Autowired
     public PersonServiceImp(PersonDAO pDAO, EmployeeDAO eDao){
         dao = pDAO;
-        this.eDao = eDao;
     }
 
     @Override
@@ -46,14 +43,8 @@ public class PersonServiceImp implements PersonService{
     }
 
     @Override
-    public Person findByEmployeeId(Integer id) {
-        Employee found = eDao.findById(id);
-        Person ret = null;
-        if(found != null){
-            //TODO Add Person.findByEmployeeId in DAO
-            //ret = dao.find
-        }
-        return ret;
+    public Person findByEmployeeId(Integer employeeId) {
+        return dao.findByEmployeeId(employeeId);
     }
     
 }

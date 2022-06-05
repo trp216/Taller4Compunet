@@ -47,5 +47,13 @@ public class EmployeeDAO implements IEmployeeDAO{
         return q.getResultList();
     }
     
-    
+    @Override
+    public Employee findByPersonId(Integer personId){
+        String jpql = "Select e from Employee e Where e.personid = "+personId;
+        TypedQuery<Employee> ret = em.createQuery(jpql, Employee.class);
+        if(ret.getResultList().isEmpty()){
+            return null;
+        }
+        return ret.getResultList().get(0);
+    }
 }
