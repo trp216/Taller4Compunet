@@ -12,8 +12,11 @@ public interface StateprovinceService {
 		
 	public Iterable<Stateprovince> findAll();
 	
-	
+	public Stateprovince findById(Integer id);
 	
 	public void save(Stateprovince sp);
+	
+//	public Stateprovince edit(Stateprovince sp, Integer countryregionid);
+	public Stateprovince edit(Stateprovince sp);
 	
 }

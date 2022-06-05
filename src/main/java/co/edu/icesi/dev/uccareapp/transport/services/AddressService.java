@@ -14,4 +14,5 @@ public Address saveAddress(int i, Address address) throws FailedValidationsExcep
 	
 	public void save(Address address);
 
+	public Address findById(Integer id);
 }

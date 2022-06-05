@@ -9,13 +9,11 @@ import org.springframework.web.bind.annotation.*;
 
 import co.edu.icesi.dev.uccareapp.transport.delegate.CountryregionDelegateImp;
 import co.edu.icesi.dev.uccareapp.transport.model.person.Countryregion;
-import co.edu.icesi.dev.uccareapp.transport.services.CountryregionServiceImp;
 import co.edu.icesi.dev.uccareapp.transport.validation.Miracle;
 
 @Controller
 public class CountryregionControllerImpl {
 	
-	//CountryregionServiceImp crService;
 	private CountryregionDelegateImp crDelegate;
 
 	@Autowired

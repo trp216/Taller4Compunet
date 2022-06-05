@@ -1,6 +1,5 @@
 package co.edu.icesi.dev.uccareapp.transport.services;
 
-import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
@@ -12,7 +11,7 @@ public interface UserService {
 	
 	public void save(UserApp user);
 
-	public Optional<UserApp> findById(long id);
+	public UserApp findById(long id);
 
 	public Iterable<UserApp> findAll();
 

@@ -614,7 +614,7 @@ public class IntegrationTests {
 				Timestamp timestamp= Timestamp.valueOf(str);  
 				old.setModifieddate(timestamp);
 				
-				Stateprovince modified = spService.edit(old, country.getCountryregionid());
+				Stateprovince modified = spService.edit(old);
 				System.out.println("Returned object with id "+modified.getStateprovinceid());
 				assertNotEquals(modified,null);
 

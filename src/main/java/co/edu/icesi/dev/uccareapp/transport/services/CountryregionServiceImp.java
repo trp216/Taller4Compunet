@@ -12,14 +12,9 @@ import co.edu.icesi.dev.uccareapp.transport.model.person.Countryregion;
 @Service
 public class CountryregionServiceImp implements CountryregionService{
 
-	//private CountryregionRepository repo;
 	private CountryRegionDAO crDAO;
 
-//	@Autowired
-//	public CountryregionServiceImp(CountryregionRepository repo) {
-//		this.repo = repo;
-//	}
-	
+
 	@Autowired
 	public CountryregionServiceImp(CountryRegionDAO crDAO) {
 		super();
@@ -54,11 +49,7 @@ public class CountryregionServiceImp implements CountryregionService{
 		Countryregion result = null;
 
 		if(cr.getCountryregionid()!=null) {
-			//Optional<Countryregion> old = repo.findById(cr.getCountryregionid());
-//			if(old.isPresent()) {
-//				result = saveCountryRegion(cr);
-//
-//			}
+
 			 result = crDAO.update(cr);
 		}
 
@@ -77,9 +68,9 @@ public class CountryregionServiceImp implements CountryregionService{
 
 	@Transactional
 	public void save(Countryregion cr) {
-		//	
+		
 		crDAO.save(cr);
-		//}
+	
 	}
 
 	@Transactional
@@ -87,11 +78,7 @@ public class CountryregionServiceImp implements CountryregionService{
 		Countryregion actual = null;
 
 		if(countryregion.getCountryregionid() != null) {
-//			Optional<Countryregion> optional = repo.findById(countryregion.getCountryregionid());
-//			if(optional.isPresent()) {
-//				save(countryregion);
-//				actual = findById(countryregion.getCountryregionid()).get();
-//			}
+
 			actual = crDAO.update(countryregion);
 		}
 

@@ -11,36 +11,31 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import co.edu.icesi.dev.uccareapp.transport.delegate.AddressDelegateImp;
 import co.edu.icesi.dev.uccareapp.transport.model.person.Address;
-import co.edu.icesi.dev.uccareapp.transport.services.AddressServiceImp;
-import co.edu.icesi.dev.uccareapp.transport.services.StateprovinceServiceImp;
 import co.edu.icesi.dev.uccareapp.transport.validation.Miracle;
 
 @Controller
 public class AddressControllerImpl {
 	
-	AddressServiceImp addressService;
-	StateprovinceServiceImp spService;
+
+	private AddressDelegateImp adDelegate;
 
 	@Autowired
-	public AddressControllerImpl(AddressServiceImp addressService, StateprovinceServiceImp spService) {
-	
-		this.addressService = addressService;
-		this.spService = spService;
+	public AddressControllerImpl(AddressDelegateImp adDelegate) {
+		this.adDelegate = adDelegate;
 	}
-
-
 
 	@GetMapping("/address/")
 	public String indexAddress(Model model) {
-		model.addAttribute("addresses", addressService.findAll());
+		model.addAttribute("addresses", adDelegate.findAll());
 		return "address/index";
 	}
 	
 	@GetMapping("/address/add")
 	public String addAddress(Model model) {
 		model.addAttribute("address", new Address());
-		model.addAttribute("stateprovinces", spService.findAll());
+		model.addAttribute("stateprovinces", adDelegate.getStateprovinces());
 
 		return "address/add-address";
 	}
@@ -52,26 +47,26 @@ public class AddressControllerImpl {
 			model.addAttribute("address", address);
 
 			if (bindingResult.hasErrors()) {
-				model.addAttribute("stateprovinces", spService.findAll());
+				model.addAttribute("stateprovinces", adDelegate.getStateprovinces());
 
 
 				return "/address/add-address";
 
 			}
 
-			addressService.save(address);
+			adDelegate.save(address);
 		}
 		return "redirect:/address/";
 	}
 	
 	@GetMapping("/address/edit/{id}")
 	public String showEditAddress(@PathVariable("id") Integer id,Model model) {
-		Address address = addressService.findById(id);
+		Address address = adDelegate.findById(id);
 		if (address == null)
 			throw new IllegalArgumentException("Invalid country Id:" + id);
 		
 		model.addAttribute("address", address);
-		model.addAttribute("provinces", spService.findAll());
+		model.addAttribute("provinces",adDelegate.getStateprovinces());
 		return "address/edit-address";
 	}
 	
@@ -84,14 +79,14 @@ public class AddressControllerImpl {
 		}
 		
 		if(bindingResult.hasErrors()) {
-			model.addAttribute("addresses", addressService.findAll());
+			model.addAttribute("addresses", adDelegate.findAll());
 			
 			return "address/index";
 		}
 		if (!action.equals("Cancel")) {
 			address.setAddressid(id);
-			addressService.edit(address,address.getStateprovince().getStateprovinceid());
-			model.addAttribute("provinces", spService.findAll());
+			adDelegate.editAddress(address);
+			model.addAttribute("provinces", adDelegate.getStateprovinces());
 		}
 		return "redirect:/address/";
 	}

@@ -7,43 +7,31 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import co.edu.icesi.dev.uccareapp.transport.delegate.StateprovinceDelegateImp;
 import co.edu.icesi.dev.uccareapp.transport.model.person.Stateprovince;
-import co.edu.icesi.dev.uccareapp.transport.services.CountryregionServiceImp;
-import co.edu.icesi.dev.uccareapp.transport.services.SalesTerritoryService;
-import co.edu.icesi.dev.uccareapp.transport.services.StateprovinceServiceImp;
 import co.edu.icesi.dev.uccareapp.transport.validation.Miracle;
 
 @Controller
 public class StateprovinceControllerImpl {
 	
-	StateprovinceServiceImp spService;
-	
-	CountryregionServiceImp crService;
-	
-	SalesTerritoryService stService;
+	private StateprovinceDelegateImp spDelegate;
 
 	@Autowired
-	public StateprovinceControllerImpl(StateprovinceServiceImp spService, 
-			CountryregionServiceImp crService,
-			SalesTerritoryService stService) {
-		
-		this.spService = spService;
-		this.crService = crService;
-		this.stService = stService;
+	public StateprovinceControllerImpl(StateprovinceDelegateImp spDelegate) {
+		this.spDelegate = spDelegate;
 	}
-	
+		
 	@GetMapping("/stateprovince/")
 	public String indexStateprovince(Model model) {
-		model.addAttribute("stateprovinces", spService.findAll());
+		model.addAttribute("stateprovinces", spDelegate.findAll());
 		return "stateprovince/index";
 	}
 	
 	@GetMapping("/stateprovince/add")
 	public String addStateprovince(Model model) {
 		model.addAttribute("stateprovince", new Stateprovince());
-		model.addAttribute("countryregions", crService.findAll());
-		System.out.println(crService.findAll());
-		model.addAttribute("salesterritory", stService.findAll());
+		model.addAttribute("countryregions", spDelegate.getCountryregion());
+		model.addAttribute("salesterritory", spDelegate.getSalesterritory());
 
 		return "stateprovince/add-stateprovince";
 	}
@@ -55,27 +43,27 @@ public class StateprovinceControllerImpl {
 			model.addAttribute("stateprovince", sp);
 
 			if (bindingResult.hasErrors()) {
-				model.addAttribute("salesterritory", stService.findAll());
-				model.addAttribute("contryregion", crService.findAll());
+				model.addAttribute("salesterritory", spDelegate.getSalesterritory());
+				model.addAttribute("contryregion", spDelegate.getCountryregion());
 
 
 				return "/stateprovince/add-stateprovince";
 
 			}
 
-			spService.save(sp);
+			spDelegate.save(sp);
 		}
 		return "redirect:/stateprovince/";
 	}
 	
 	@GetMapping("/stateprovince/edit/{id}")
 	public String showEditProvince(@PathVariable("id") Integer id,Model model) {
-		Stateprovince stateprovince = spService.findById(id);
+		Stateprovince stateprovince = spDelegate.findById(id);
 		if (stateprovince == null)
 			throw new IllegalArgumentException("Invalid country Id:" + id);
 		
 		model.addAttribute("stateprovince", stateprovince);
-		model.addAttribute("countries", crService.findAll());
+		model.addAttribute("countries", spDelegate.getCountryregion());
 		return "stateprovince/edit-stateprovince";
 	}
 	
@@ -88,14 +76,15 @@ public class StateprovinceControllerImpl {
 		}
 		
 		if(bindingResult.hasErrors()) {
-			model.addAttribute("stateprovince", spService.findAll());
+			model.addAttribute("stateprovince", spDelegate.findAll());
 			
 			return "stateprovince/index";
 		}
 		if (action != null && !action.equals("Cancel")) {
 			stateprovince.setStateprovinceid(id);
-			spService.edit(stateprovince,stateprovince.getCountryregion().getCountryregionid());
-			model.addAttribute("stateprovinces", spService.findAll());
+			spDelegate.edit(stateprovince);
+			
+			model.addAttribute("stateprovinces", spDelegate.findAll());
 		}
 		return "redirect:/stateprovince/";
 	}

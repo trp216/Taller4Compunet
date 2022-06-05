@@ -1,7 +1,7 @@
 package co.edu.icesi.dev.uccareapp.transport.rest;
 
 import org.springframework.beans.factory.annotation.Autowired;
-
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -23,7 +23,7 @@ public class CountryregionRestController {
 	}
 	
 	
-	@RequestMapping(value = "/api/countryregion/add/", method = RequestMethod.POST)
+	@RequestMapping(value = "/api/countryregion/", method = RequestMethod.POST)
 	public void saveCountryregion(@RequestBody Countryregion countryregion) {
 		try {
 			crService.save(countryregion);
@@ -34,7 +34,7 @@ public class CountryregionRestController {
 	}
 	
 	
-	@RequestMapping(value = "/api/countryregion/edit/{id}", method = RequestMethod.PUT)
+	@RequestMapping(value = "/api/countryregion/", method = RequestMethod.PUT)
 	public Countryregion editCountryregion(@RequestBody Countryregion countryregion) {
 		
 		try {
@@ -44,6 +44,11 @@ public class CountryregionRestController {
 			e.printStackTrace();
 			return countryregion;
 		}
+	}
+	
+	@RequestMapping(value = "/api/countryregion/{id}", method = RequestMethod.GET)
+	public Countryregion findById(@PathVariable("id") Integer id) {
+		return crService.findById(id);
 	}
 
 }

@@ -16,6 +16,8 @@ import javax.persistence.SequenceGenerator;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import co.edu.icesi.dev.uccareapp.transport.validation.Miracle;
 import lombok.ToString;
 
@@ -51,11 +53,13 @@ public class Stateprovince implements Serializable {
 
 	// bi-directional many-to-one association to Address
 	@OneToMany(mappedBy = "stateprovince")
+	@JsonIgnore
 	private List<Address> addresses;
 
 	// bi-directional many-to-one association to Countryregion
 	@ManyToOne
 	@JoinColumn(name = "countryregioncode")
+	//@JsonIgnore
 	private Countryregion countryregion;
 
 	public Stateprovince() {

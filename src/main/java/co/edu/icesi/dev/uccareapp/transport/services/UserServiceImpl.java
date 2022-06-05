@@ -1,6 +1,5 @@
 package co.edu.icesi.dev.uccareapp.transport.services;
 
-import java.util.Optional;
 
 import javax.transaction.Transactional;
 
@@ -41,9 +40,9 @@ public class UserServiceImpl implements UserService{
 		//}
 	}
 
-	public Optional<UserApp> findById(long id) {
+	public UserApp findById(long id) {
 
-		return userRepository.findById(id);
+		return (userRepository.findById(id)).get();
 	}
 
 	public Iterable<UserApp> findAll() {

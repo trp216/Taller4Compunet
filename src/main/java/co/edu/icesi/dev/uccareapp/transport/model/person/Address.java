@@ -17,6 +17,8 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import co.edu.icesi.dev.uccareapp.transport.validation.Miracle;
 
 /**
@@ -54,10 +56,12 @@ public class Address implements Serializable {
 	@NotNull(groups=Miracle.class)
 	@ManyToOne
 	@JoinColumn(name = "stateprovinceid")
+	//@JsonIgnore
 	private Stateprovince stateprovince;
 
 	// bi-directional many-to-one association to Businessentityaddress
 	@OneToMany(mappedBy = "address")
+	@JsonIgnore
 	private List<Businessentityaddress> businessentityaddresses;
 
 	public Address() {
