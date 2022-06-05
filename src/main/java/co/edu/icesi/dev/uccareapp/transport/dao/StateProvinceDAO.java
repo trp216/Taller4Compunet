@@ -101,7 +101,6 @@ public class StateProvinceDAO implements IStateProvinceDAO{
 	//las direcciones que tienen al menos dos
 	//encabezados de órdenes de venta.
 	public List<Address> getAddressesWithSalesorderheader() {
-
 		String jpql = "SELECT ad "
 				+ "FROM Address ad, Salesterritory st, Salesorderheader soh, Stateprovince sp "
 				+ "WHERE sp.territoryid = st.territoryid "

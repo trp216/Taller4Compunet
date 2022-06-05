@@ -230,7 +230,7 @@ public class TestStateprovinceDAO {
 		assertThat(results.size(), equalTo(2));
 	}
 	
-	@Test
+	//@Test
 	@Order(1)
 	@Transactional(readOnly = false, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
 	void getStateProvinceAndAddressesTest() {
