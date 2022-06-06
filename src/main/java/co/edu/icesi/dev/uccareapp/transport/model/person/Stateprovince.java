@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -18,6 +19,7 @@ import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import co.edu.icesi.dev.uccareapp.transport.model.sales.Salestaxrate;
 import co.edu.icesi.dev.uccareapp.transport.validation.Miracle;
 import lombok.ToString;
 
@@ -44,6 +46,8 @@ public class Stateprovince implements Serializable {
 	private String name;
 
 	private Integer rowguid;
+	
+	private Integer adCount;
 
 	@Size(min=5,max=5,groups=Miracle.class)
 	@Pattern(regexp="^(0|[1-9][0-9]*)$")
@@ -61,8 +65,13 @@ public class Stateprovince implements Serializable {
 	@JoinColumn(name = "countryregioncode")
 	//@JsonIgnore
 	private Countryregion countryregion;
+	
+	@OneToMany
+	@JoinColumn(name = "stateprovince")
+	private List<Salestaxrate> salestaxrates;
 
 	public Stateprovince() {
+		
 	}
 
 	public Address addAddress(Address address) {
@@ -76,6 +85,8 @@ public class Stateprovince implements Serializable {
 		return this.addresses;
 	}
 
+	
+	
 	public Countryregion getCountryregion() {
 		return this.countryregion;
 	}
@@ -149,6 +160,14 @@ public class Stateprovince implements Serializable {
 
 	public void setTerritoryid(Integer territoryid) {
 		this.territoryid = territoryid;
+	}
+
+	public Integer getAdCount() {
+		return adCount;
+	}
+
+	public void setAdCount(Integer adCount) {
+		this.adCount = adCount;
 	}
 
 }

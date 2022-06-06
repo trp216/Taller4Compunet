@@ -19,6 +19,7 @@ import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import co.edu.icesi.dev.uccareapp.transport.model.sales.Salesorderheader;
 import co.edu.icesi.dev.uccareapp.transport.validation.Miracle;
 
 /**
@@ -51,6 +52,8 @@ public class Address implements Serializable {
 	private Integer rowguid;
 
 	private String spatiallocation;
+	
+	private int sohcount;
 
 	// bi-directional many-to-one association to Stateprovince
 	@NotNull(groups=Miracle.class)
@@ -58,6 +61,12 @@ public class Address implements Serializable {
 	@JoinColumn(name = "stateprovinceid")
 	//@JsonIgnore
 	private Stateprovince stateprovince;
+	
+	@OneToMany(mappedBy = "shiptoaddress")
+	//@JsonIgnore
+	//@OneToMany
+	//@JoinColumn(name="salesorderid")
+	private List<Salesorderheader> salesorderheaders;
 
 	// bi-directional many-to-one association to Businessentityaddress
 	@OneToMany(mappedBy = "address")
@@ -72,6 +81,23 @@ public class Address implements Serializable {
 		businessentityaddress.setAddress(this);
 
 		return businessentityaddress;
+	}
+
+	
+	
+	
+	public List<Salesorderheader> getSalesorderheaders() {
+		return salesorderheaders;
+	}
+	
+	public void addSalesorderheader(Salesorderheader soh) {
+		salesorderheaders.add(soh);
+		setSohcount(getSohcount() + 1);
+	}
+
+	public void setSalesorderheaders(List<Salesorderheader> salesorderheaders) {
+		this.salesorderheaders = salesorderheaders;
+		setSohcount(salesorderheaders.size());
 	}
 
 	public Integer getAddressid() {
@@ -160,5 +186,14 @@ public class Address implements Serializable {
 	public void setStateprovince(Stateprovince stateprovince) {
 		this.stateprovince = stateprovince;
 	}
+
+	public int getSohcount() {
+		return sohcount;
+	}
+
+	public void setSohcount(int sohcount) {
+		this.sohcount = sohcount;
+	}
+
 
 }

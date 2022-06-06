@@ -15,6 +15,10 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import co.edu.icesi.dev.uccareapp.transport.model.person.Address;
+
 /**
  * The persistent class for the salesorderheader database table.
  *
@@ -90,6 +94,11 @@ public class Salesorderheader implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "salespersonid")
 	private Salesperson salesperson;
+	
+	@ManyToOne
+	@JoinColumn(name = "salesorderheaders")
+	//@JsonIgnore
+	private Address shiptoaddress;
 
 	// bi-directional many-to-one association to Salesterritory
 	@ManyToOne
