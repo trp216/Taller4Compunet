@@ -2,9 +2,7 @@ package co.edu.icesi.dev.uccareapp.transport.delegate;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.ArrayList;
 
-import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;

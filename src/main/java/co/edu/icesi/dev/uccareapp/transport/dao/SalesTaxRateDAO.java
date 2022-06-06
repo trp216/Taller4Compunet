@@ -1,6 +1,5 @@
 package co.edu.icesi.dev.uccareapp.transport.dao;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -11,7 +10,6 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import co.edu.icesi.dev.uccareapp.transport.model.person.Stateprovince;
 import co.edu.icesi.dev.uccareapp.transport.model.sales.Salestaxrate;
 import co.edu.icesi.dev.uccareapp.transport.model.sales.Salesterritory;
 
