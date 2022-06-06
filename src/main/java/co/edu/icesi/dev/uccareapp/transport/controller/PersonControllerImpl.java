@@ -55,4 +55,22 @@ public class PersonControllerImpl {
         model.addAttribute("person", person);
         return "person/edit-person";
     }
+
+    @PostMapping("/person/edit/{id}")
+    public String editPerson(@PathVariable("id") Integer id, @RequestParam(value="action")
+    String action, Person person, BindingResult result, Model model){
+        if(action.equals("Cancel")){
+            return "redirect:/person/";
+        }
+        if(result.hasErrors()){
+            model.addAttribute("persons", pDelegate.findAll());
+            return "redirect:/person/";
+        }
+        if(action != null && !action.equals("Cancel")){
+            person.setBusinessentityid(id);
+            pDelegate.editPerson(person);
+        }
+        model.addAttribute("persons", pDelegate.findAll());
+        return "redirect:/person/";
+    }
 }

@@ -20,19 +20,73 @@
         <h2 class="mb-5">Edit Person</h2>
         <div class="row">
             <div class="col-md-6">
-                <form action="#" th:object="${person}" 
-                th:action="@{/person/edit/{id}(id=${person.businessentityid})}" method="post">	
-                <div class="row">
-                    <div class="form-group col-md-6">
-                        <label for="stateprovincecode" class="col-form-label">Code</label> <input
-							type="text" th:field="*{stateprovincecode}" class="form-control" id="stateprovincecode"
-							placeholder="Code"> 
-							<span
-								th:if="${#fields.hasErrors('stateprovincecode')}" th:errors="*{stateprovincecode}"
-								class="text-danger">
-							</span>
+                
+                <form action="#" th:action="@{/person/edit/{id}}" th:object="${person}" method="post">
+                    <div class="row">
+                        <div class="form-group col-md-6">
+                            <label for="additionalcontactinfo" class="col-form-label">Contact Info</label>
+                            <input type="text" th:field="*{additionalcontactinfo}" class="form-control"
+                                id="additionalcontactinfo" placeholder="additionalcontactinfo">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="demographics" class="col-form-label">Demographics</label>
+                            <input type="text" th:field="*{demographics}" class="form-control"
+                                id="demographics" placeholder="demographics">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="emailpromotion" class="col-form-label">Email Promotion</label>
+                            <input type="number" th:field="*{emailpromotion}" class="form-control"
+                                id="emailpromotion" placeholder="emailpromotion">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="firstname" class="col-form-label">First Name</label>
+                            <input type="text" th:field="*{firstname}" class="form-control"
+                                id="firstname" placeholder="firstname">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="lastname" class="col-form-label">Last Name</label>
+                            <input type="text" th:field="*{lastname}" class="form-control"
+                                id="lastname" placeholder="lastname">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="middlename" class="col-form-label">Middle Name</label>
+                            <input type="text" th:field="*{middlename}" class="form-control"
+                                id="middlename" placeholder="middlename">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="namestyle" class="col-form-label">Namestyle</label>
+                            <input type="text" th:field="*{namestyle}" class="form-control"
+                                id="namestyle" placeholder="namestyle">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="persontype" class="col-form-label">Person Type</label>
+                            <input type="text" th:field="*{persontype}" class="form-control"
+                                id="persontype" placeholder="persontype">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="suffix" class="col-form-label">Suffix</label>
+                            <input type="text" th:field="*{suffix}" class="form-control"
+                                id="suffix" placeholder="suffix">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="title" class="col-form-label">Title</label>
+                            <input type="text" th:field="*{title}" class="form-control"
+                                id="title" placeholder="title">
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-3 mt-3">
+                                <input type="submit" name="action" class="btn btn-primary" value="Add">
+                            </div>
+                            <div class="col-md-3 mt-3">
+                                <input type="reset" name="action" class="btn btn-secondary" value="Clear">
+                            </div>
+                            <div class="col-md-3 mt-3">
+                                <input type="submit" name="action" class="btn btn-secondary" value="Cancel">
+                            </div>
+                        </div>
                     </div>
-                </div>
+                </form>
             </div>
         </div>
     </div>

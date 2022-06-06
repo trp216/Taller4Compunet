@@ -34,4 +34,14 @@ public class PersonRestController {
     public Person findById(@PathVariable("id") Integer id){
         return pService.findById(id);
     }
+
+    @RequestMapping(value="/api/person", method = RequestMethod.PUT)
+    public Person editPerson(@RequestBody Person person){
+        try{
+            return pService.update(person);
+        }catch(Exception e){
+            e.printStackTrace();
+            return person;
+        }
+    }
 }

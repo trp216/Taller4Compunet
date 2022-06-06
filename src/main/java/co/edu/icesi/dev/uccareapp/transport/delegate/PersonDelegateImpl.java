@@ -22,7 +22,7 @@ public class PersonDelegateImpl implements PersonDelegate{
     @Override
     public Person editPerson(Person person) {
         rest.put(PATH, person, Person.class);
-        return null;
+        return person;
     }
 
     @Override
