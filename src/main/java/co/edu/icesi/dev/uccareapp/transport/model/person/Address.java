@@ -53,7 +53,7 @@ public class Address implements Serializable {
 
 	private String spatiallocation;
 	
-	private int sohCount;
+	private int sohcount;
 
 	// bi-directional many-to-one association to Stateprovince
 	@NotNull(groups=Miracle.class)
@@ -63,6 +63,9 @@ public class Address implements Serializable {
 	private Stateprovince stateprovince;
 	
 	@OneToMany(mappedBy = "shiptoaddress")
+	//@JsonIgnore
+	//@OneToMany
+	//@JoinColumn(name="salesorderid")
 	private List<Salesorderheader> salesorderheaders;
 
 	// bi-directional many-to-one association to Businessentityaddress
@@ -89,12 +92,12 @@ public class Address implements Serializable {
 	
 	public void addSalesorderheader(Salesorderheader soh) {
 		salesorderheaders.add(soh);
-		sohCount++;
+		setSohcount(getSohcount() + 1);
 	}
 
 	public void setSalesorderheaders(List<Salesorderheader> salesorderheaders) {
 		this.salesorderheaders = salesorderheaders;
-		sohCount = salesorderheaders.size();
+		setSohcount(salesorderheaders.size());
 	}
 
 	public Integer getAddressid() {
@@ -183,5 +186,14 @@ public class Address implements Serializable {
 	public void setStateprovince(Stateprovince stateprovince) {
 		this.stateprovince = stateprovince;
 	}
+
+	public int getSohcount() {
+		return sohcount;
+	}
+
+	public void setSohcount(int sohcount) {
+		this.sohcount = sohcount;
+	}
+
 
 }

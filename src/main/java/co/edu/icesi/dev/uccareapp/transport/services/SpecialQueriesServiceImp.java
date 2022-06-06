@@ -37,18 +37,12 @@ public class SpecialQueriesServiceImp {
 		this.stDAO = stDAO;
 		this.spDAO = spDAO;
 	}
+
 	
 	public List<Address> findAddressesWithSalesorderheader() {
-		ArrayList<Address> ads = new ArrayList<Address>();
-		if(adDAO.getAddressesWithSalesorderheader()!=null) {
-			
-			ads = (ArrayList<Address>) adDAO.getAddressesWithSalesorderheader();	
-		}
-		//System.out.println(">>>>>>In the service");
-		//System.out.println(ads.toString());
-		return ads;
+
+		return adDAO.getAddressesWithSalesorderheader();
 	}
-	
 	
 
 	public List<Stateprovince> findStateProvinceAndAddresses(Salesterritory st){

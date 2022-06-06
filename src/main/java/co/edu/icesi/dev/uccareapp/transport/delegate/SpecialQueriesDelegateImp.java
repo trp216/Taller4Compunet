@@ -23,25 +23,25 @@ public class SpecialQueriesDelegateImp {
 	public SpecialQueriesDelegateImp() {
 		rest = new RestTemplate();
 	}
-	
+
 	public Iterable<Address> findAddressesWithSalesorderheader() {
 		Address[] sps = rest.getForObject(PATH+"ad/", Address[].class);
 		return Arrays.asList(sps);
 	}
-	
+
 	public List<Stateprovince> findStateProvinceAndAddresses(Salesterritory st) {
 		//Stateprovince[] sp = null;
 		//Stateprovince[] sp = rest.postForEntity(PATH+"sp/",st, Stateprovince[].class);
-//		Stateprovince[] sp = rest.postForEntity(PATH+"sp/",st, 
-//				new ParameterizedTypeReference<List<Stateprovince>>() {});
-//		
+		//		Stateprovince[] sp = rest.postForEntity(PATH+"sp/",st, 
+		//				new ParameterizedTypeReference<List<Stateprovince>>() {});
+		//		
 		ResponseEntity<Stateprovince[]> sp = rest.postForEntity(PATH+"sp/",st, Stateprovince[].class);
-		
-//		return Arrays.asList(sp);
+
+		//		return Arrays.asList(sp);
 		return Arrays.asList(sp.getBody());
-		
+
 	}
-	
+
 	public Iterable<Salesterritory> getSalesterritory(){
 		Salesterritory[] sts = rest.getForObject(PATH + "salesterritory/", Salesterritory[].class);
 		return Arrays.asList(sts);

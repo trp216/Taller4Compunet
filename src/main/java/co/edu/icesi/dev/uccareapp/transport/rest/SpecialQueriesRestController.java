@@ -1,5 +1,6 @@
 package co.edu.icesi.dev.uccareapp.transport.rest;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,23 +16,24 @@ import co.edu.icesi.dev.uccareapp.transport.services.SpecialQueriesServiceImp;
 
 @RestController
 public class SpecialQueriesRestController {
-	
+
 	@Autowired
 	private SpecialQueriesServiceImp sqService;
-	
+
 	@RequestMapping(value = "/api/specialqueries/ad", method = RequestMethod.GET)
 	public Iterable<Address> findAddressesWithSalesorderheader() {
+
 		return sqService.findAddressesWithSalesorderheader();
 	}
-	
+
 	@RequestMapping(value = "/api/specialqueries/sp", method = RequestMethod.POST)
 	public List<Stateprovince> findStateProvinceAndAddresses(@RequestBody  Salesterritory st) {
 		return sqService.findStateProvinceAndAddresses(st);
 	}
-	
+
 	@RequestMapping(value = "/api/specialqueries/salesterritory", method = RequestMethod.GET)
 	public Iterable<Salesterritory> getSalesterritory() {
-		
+
 		return sqService.findSalesterritory();
 	}
 

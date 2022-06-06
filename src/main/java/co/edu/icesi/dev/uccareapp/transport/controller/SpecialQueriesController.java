@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import co.edu.icesi.dev.uccareapp.transport.delegate.SpecialQueriesDelegateImp;
+import co.edu.icesi.dev.uccareapp.transport.model.person.Address;
 import co.edu.icesi.dev.uccareapp.transport.model.person.Stateprovince;
 import co.edu.icesi.dev.uccareapp.transport.model.sales.Salesterritory;
 import co.edu.icesi.dev.uccareapp.transport.validation.Miracle;
@@ -30,6 +31,8 @@ public class SpecialQueriesController {
 	
 	@GetMapping("/specialqueries/addresses/")
 	public String indexSpecialqueries(Model model) {
+		
+		
 		model.addAttribute("addresses", 
 				sqDelegate.findAddressesWithSalesorderheader());
 		return "specialqueries/addresses";
