@@ -27,19 +27,25 @@ public class SpecialQueriesDelegateImp {
 		return Arrays.asList(sps);
 	}
 
-	public List<Stateprovince> findStateProvinceAndAddresses(Salesterritory st) {
-		//Stateprovince[] sp = null;
-		//Stateprovince[] sp = rest.postForEntity(PATH+"sp/",st, Stateprovince[].class);
-		//		Stateprovince[] sp = rest.postForEntity(PATH+"sp/",st, 
-		//				new ParameterizedTypeReference<List<Stateprovince>>() {});
-		//		
-		ResponseEntity<Stateprovince[]> sp = rest.postForEntity(PATH+"sp/",st, Stateprovince[].class);
+//	public List<Stateprovince> findStateProvinceAndAddresses(Salesterritory st) {
+//		//Stateprovince[] sp = null;
+//		//Stateprovince[] sp = rest.postForEntity(PATH+"sp/",st, Stateprovince[].class);
+//		//		Stateprovince[] sp = rest.postForEntity(PATH+"sp/",st, 
+//		//				new ParameterizedTypeReference<List<Stateprovince>>() {});
+//		//		
+//		ResponseEntity<Stateprovince[]> sp = rest.postForEntity(PATH+"sp/",st, Stateprovince[].class);
+//
+//		//		return Arrays.asList(sp);
+//		return Arrays.asList(sp.getBody());
+//
+//	}
 
-		//		return Arrays.asList(sp);
-		return Arrays.asList(sp.getBody());
+	public List<Stateprovince> findStateProvinceAndAddresses() {
+
+		Stateprovince[] sp = rest.getForObject(PATH+"sp/", Stateprovince[].class);
+		return Arrays.asList(sp);
 
 	}
-
 	public Iterable<Salesterritory> getSalesterritory(){
 		Salesterritory[] sts = rest.getForObject(PATH + "salesterritory/", Salesterritory[].class);
 		return Arrays.asList(sts);

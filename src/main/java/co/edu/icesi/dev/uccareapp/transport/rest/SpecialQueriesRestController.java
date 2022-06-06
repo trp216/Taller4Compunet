@@ -25,9 +25,14 @@ public class SpecialQueriesRestController {
 		return sqService.findAddressesWithSalesorderheader();
 	}
 
-	@RequestMapping(value = "/api/specialqueries/sp", method = RequestMethod.POST)
-	public List<Stateprovince> findStateProvinceAndAddresses(@RequestBody  Salesterritory st) {
-		return sqService.findStateProvinceAndAddresses(st);
+//	@RequestMapping(value = "/api/specialqueries/sp", method = RequestMethod.POST)
+//	public List<Stateprovince> findStateProvinceAndAddresses(@RequestBody  Salesterritory st) {
+//		return sqService.findStateProvinceAndAddresses(st);
+//	}
+	
+	@RequestMapping(value = "/api/specialqueries/sp", method = RequestMethod.GET)
+	public List<Stateprovince> findStateProvinceAndAddresses() {
+		return sqService.findStateProvinceAndAddresses();
 	}
 
 	@RequestMapping(value = "/api/specialqueries/salesterritory", method = RequestMethod.GET)

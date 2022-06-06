@@ -127,7 +127,7 @@ public class Application {
 			str.setStateprovince(sp1);
 
 			strRepository.save(str);
-
+///////////////////////////////////////////////////////////
 
 			Address a2 = new Address();
 			a2.setAddressline1("Line 1 of address");
@@ -158,6 +158,57 @@ public class Application {
 
 			stateprovinceRepository.save(sp2);
 
+////////////////////////////////////////////////////////////////
+			
+			Countryregion cr2 = new Countryregion();
+			cr2.setName("Estados Unidos");
+			cr2.setCountryregioncode("U07");
+
+			crRepository.save(cr2);
+			
+			Stateprovince sp3 = new Stateprovince();
+			sp3.setName("Alabama");
+			sp3.setStateprovincecode("12333");
+			sp3.setCountryregion(cr2);
+			
+			
+			ArrayList<Address> ads3 = new ArrayList<Address>();
+			
+			sp3.setAddresses(ads3);
+
+			stateprovinceRepository.save(sp3);
+			
+			Address a3 = new Address();
+			a3.setAddressline1("Line 1 of address");
+			a3.setCity("Montgomery");
+			a3.setAddressline2("Line 2 of address");
+			a3.setPostalcode("A12147");
+			a3.setSpatiallocation("Comuna 2");
+
+			
+			a3.setSalesorderheaders(soh);
+			a3.setStateprovince(sp3);
+
+			addressRepository.save(a3);
+			
+			Address a4 = new Address();
+			a4.setAddressline1("Line 1 of address");
+			a4.setCity("Birmingham");
+			a4.setAddressline2("Line 2 of address");
+			a4.setPostalcode("A12148");
+			a4.setSpatiallocation("Comuna 4");
+
+			
+			a4.setSalesorderheaders(soh);
+			a4.setStateprovince(sp3);
+
+			addressRepository.save(a4);
+			
+			sp3.getAddresses().add(a3);
+			sp3.getAddresses().add(a4);
+			
+			stateprovinceRepository.update(sp3);
+			
 		};
 
 

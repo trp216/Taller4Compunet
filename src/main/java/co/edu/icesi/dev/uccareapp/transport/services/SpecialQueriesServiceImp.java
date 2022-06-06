@@ -45,22 +45,41 @@ public class SpecialQueriesServiceImp {
 	}
 	
 
-	public List<Stateprovince> findStateProvinceAndAddresses(Salesterritory st){
-		List<Object[]> results = strDAO.getStateProvinceAndAddresses(st);
+//	public List<Stateprovince> findStateProvinceAndAddresses(Salesterritory st){
+//		List<Object[]> results = strDAO.getStateProvinceAndAddresses(st);
+//
+//		List<Stateprovince> sps = new ArrayList<Stateprovince>();
+//		
+//		for (Object[] i : results) {
+//			Stateprovince sp = (Stateprovince)i[0];
+//			
+//			Integer c = (Integer)i[1];
+//			
+//			sp.setAdCount(c);
+//			sps.add(sp);
+//			spDAO.update(sp);
+//		}
+//		System.out.println(">>>>>>In the service");
+//		System.out.println(results.toString());
+//		return sps;
+//	}
+	
+	public List<Stateprovince> findStateProvinceAndAddresses(){
+		List<Object[]> results = spDAO.getStateProvinceAndAddresses();
 
 		List<Stateprovince> sps = new ArrayList<Stateprovince>();
 		
 		for (Object[] i : results) {
 			Stateprovince sp = (Stateprovince)i[0];
 			
-			Integer c = (Integer)i[1];
-			
-			sp.setAdCount(c);
+			Long c = (Long)i[1];
+			Integer count = Math.toIntExact(c);
+			sp.setAdcount(count);
 			sps.add(sp);
 			spDAO.update(sp);
 		}
-		System.out.println(">>>>>>In the service");
-		System.out.println(results.toString());
+//		System.out.println(">>>>>>In the service");
+//		System.out.println(results.toString());
 		return sps;
 	}
 	

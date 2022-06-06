@@ -46,7 +46,7 @@ public class Stateprovince implements Serializable {
 
 	private Integer rowguid;
 	
-	private Integer adCount;
+	private Integer adcount;
 
 	@Size(min=5,max=5,groups=Miracle.class)
 	@Pattern(regexp="^(0|[1-9][0-9]*)$")
@@ -161,12 +161,12 @@ public class Stateprovince implements Serializable {
 		this.territoryid = territoryid;
 	}
 
-	public Integer getAdCount() {
-		return adCount;
+	public Integer getAdcount() {
+		return adcount;
 	}
 
-	public void setAdCount(Integer adCount) {
-		this.adCount = adCount;
+	public void setAdcount(Integer adCount) {
+		this.adcount = adCount;
 	}
 
 }

@@ -103,7 +103,7 @@ public class AddressDAO implements IAddressDAO{
 	//encabezados de órdenes de venta.
 	public List<Address> getAddressesWithSalesorderheader() {
 
-		String jpql = "Select a from Address a WHERE a.sohCount >= 2";
+		String jpql = "Select a from Address a WHERE a.sohcount >= 2";
 		return entityManager.createQuery(jpql,Address.class).getResultList();
 		
 	}

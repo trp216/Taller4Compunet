@@ -110,8 +110,19 @@ public class StateProvinceDAO implements IStateProvinceDAO{
 
 		return entityManager.createQuery(jpql,Address.class).getResultList();
 
-			
+
 	}
 
+	public List<Object[]> getStateProvinceAndAddresses(){
+
+		String jpql = "SELECT sp, COUNT(a.addressid) "
+				+ "FROM Stateprovince sp, Address a  "
+				+ "WHERE sp.stateprovinceid = a.stateprovince"   
+				+ " AND a.sohcount>=2"
+				+ " GROUP BY sp.stateprovinceid "
+				+ "ORDER BY sp.name";
+
+		return entityManager.createQuery(jpql,Object[].class).getResultList();
+	}
 
 }
