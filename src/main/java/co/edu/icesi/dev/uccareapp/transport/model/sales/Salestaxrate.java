@@ -42,7 +42,7 @@ public class Salestaxrate implements Serializable {
 
 	@NotNull(groups = Miracle.class)
 	@ManyToOne
-	@JoinColumn(name = "stateprovinceid")
+	@JoinColumn(name = "salestaxrates")
 //	@JsonIgnore
 	private Stateprovince stateprovince;
 

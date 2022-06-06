@@ -24,7 +24,7 @@ public class SpecialQueriesRestController {
 		return sqService.findAddressesWithSalesorderheader();
 	}
 	
-	@RequestMapping(value = "/api/specialqueries/sp", method = RequestMethod.GET)
+	@RequestMapping(value = "/api/specialqueries/sp", method = RequestMethod.POST)
 	public List<Stateprovince> findStateProvinceAndAddresses(@RequestBody  Salesterritory st) {
 		return sqService.findStateProvinceAndAddresses(st);
 	}

@@ -32,7 +32,7 @@
 								<th>Postalcode</th>
 								<th>Spatial location</th>
 								<th>State-province</th>
-								<th>Edit</th>
+								
 						
 								
 							</tr>
@@ -46,8 +46,6 @@
 								<td class="text-info" th:text="${address.postalcode}"></td>
 								<td class="text-info" th:text="${address.spatiallocation}"></td>
 								<td th:text="${address.stateprovince.name}"></td>
-								<td><a th:href="@{/address/edit/{id}(id=${address.addressid})}"
-                                    class="btn btn-primary"><i class="fas fa-user-edit ml-2"></i></a></td>
 								
 							</tr>
 						</tbody>

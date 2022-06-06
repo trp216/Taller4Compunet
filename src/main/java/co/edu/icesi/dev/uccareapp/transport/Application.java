@@ -144,6 +144,7 @@ public class Application {
 	    	ArrayList<Address> ads = new ArrayList<Address>();
 	    	ads.add(a1);
 	    	sp2.setAddresses(ads);
+	    	
 	    	stateprovinceRepository.save(sp2);
 	    	
 		};

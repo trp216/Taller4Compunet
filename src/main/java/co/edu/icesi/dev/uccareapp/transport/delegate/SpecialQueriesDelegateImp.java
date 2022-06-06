@@ -4,6 +4,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.ArrayList;
 
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
@@ -28,9 +30,15 @@ public class SpecialQueriesDelegateImp {
 	}
 	
 	public List<Stateprovince> findStateProvinceAndAddresses(Salesterritory st) {
+		//Stateprovince[] sp = null;
+		//Stateprovince[] sp = rest.postForEntity(PATH+"sp/",st, Stateprovince[].class);
+//		Stateprovince[] sp = rest.postForEntity(PATH+"sp/",st, 
+//				new ParameterizedTypeReference<List<Stateprovince>>() {});
+//		
+		ResponseEntity<Stateprovince[]> sp = rest.postForEntity(PATH+"sp/",st, Stateprovince[].class);
 		
-		Stateprovince[] sp = rest.getForObject(PATH+"sp/", Stateprovince[].class);
-		return Arrays.asList(sp);
+//		return Arrays.asList(sp);
+		return Arrays.asList(sp.getBody());
 		
 	}
 	

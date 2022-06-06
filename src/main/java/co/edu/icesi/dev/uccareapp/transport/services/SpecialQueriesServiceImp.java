@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import co.edu.icesi.dev.uccareapp.transport.dao.AddressDAO;
 import co.edu.icesi.dev.uccareapp.transport.dao.SalesTaxRateDAO;
 import co.edu.icesi.dev.uccareapp.transport.dao.SalesTerritoryDAO;
+import co.edu.icesi.dev.uccareapp.transport.dao.StateProvinceDAO;
 import co.edu.icesi.dev.uccareapp.transport.model.person.Address;
 import co.edu.icesi.dev.uccareapp.transport.model.person.Stateprovince;
 import co.edu.icesi.dev.uccareapp.transport.model.sales.Salesterritory;
@@ -25,12 +26,16 @@ public class SpecialQueriesServiceImp {
 	@Autowired
 	private SalesTerritoryDAO stDAO;
 	
+	@Autowired
+	private StateProvinceDAO spDAO;
+	
 	
 	@Autowired
-	public SpecialQueriesServiceImp(AddressDAO adDAO, SalesTaxRateDAO strDAO, SalesTerritoryDAO stDAO) {
+	public SpecialQueriesServiceImp(StateProvinceDAO spDAO,AddressDAO adDAO, SalesTaxRateDAO strDAO, SalesTerritoryDAO stDAO) {
 		this.adDAO = adDAO;
 		this.strDAO = strDAO;
 		this.stDAO = stDAO;
+		this.spDAO = spDAO;
 	}
 	
 	public List<Address> findAddressesWithSalesorderheader() {
@@ -58,6 +63,7 @@ public class SpecialQueriesServiceImp {
 			
 			sp.setAdCount(c);
 			sps.add(sp);
+			spDAO.update(sp);
 		}
 		System.out.println(">>>>>>In the service");
 		System.out.println(results.toString());

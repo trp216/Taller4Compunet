@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -18,6 +19,7 @@ import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import co.edu.icesi.dev.uccareapp.transport.model.sales.Salestaxrate;
 import co.edu.icesi.dev.uccareapp.transport.validation.Miracle;
 import lombok.ToString;
 
@@ -63,6 +65,10 @@ public class Stateprovince implements Serializable {
 	@JoinColumn(name = "countryregioncode")
 	//@JsonIgnore
 	private Countryregion countryregion;
+	
+	@OneToMany
+	@JoinColumn(name = "stateprovince")
+	private List<Salestaxrate> salestaxrates;
 
 	public Stateprovince() {
 		

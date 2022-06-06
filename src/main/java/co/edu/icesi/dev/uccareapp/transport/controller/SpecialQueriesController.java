@@ -64,7 +64,7 @@ public class SpecialQueriesController {
 		
 		model.addAttribute("stateprovinces",results);
 		//model.addAttribute("count",count);
-		return "specialqueries/stateprovinces/results";
+		return "specialqueries/stateprovincesresult";
 	}
 	
 	

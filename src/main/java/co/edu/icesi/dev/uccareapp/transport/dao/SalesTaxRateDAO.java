@@ -93,17 +93,27 @@ public class SalesTaxRateDAO implements ISalesTaxRateDAO{
 	public List<Object[]> getStateProvinceAndAddresses(Salesterritory st) {
 
 
+//		String jpql = "SELECT sp, COUNT(a.addressid) "
+//				//"SELECT sp.name, COUNT(a.addressid) "
+//				+ "FROM Stateprovince sp, Address a "
+//				+ "WHERE sp.stateprovinceid = a.stateprovince"
+//				+ " AND sp.territoryid = " + st.getTerritoryid()   
+//				//+ " LEFT JOIN Salestaxrate str ON sp.stateprovinceid = str.stateprovince"
+//				//SELECT stateprovince FROM Salestaxrate WHERE Salestaxrate.stateprovince = sp.stateprovinceid
+//				+ " AND EXISTS(SELECT str.stateprovince FROM Salestaxrate str WHERE str.stateprovince = sp.stateprovinceid)"
+//				+ " GROUP BY sp.stateprovinceid "
+//				+ "ORDER BY sp.name";
+
 		String jpql = "SELECT sp, COUNT(a.addressid) "
 				//"SELECT sp.name, COUNT(a.addressid) "
-				+ "FROM Stateprovince sp, Address a "
+				+ "FROM Stateprovince sp, Address a, Salestaxrate str  "
 				+ "WHERE sp.stateprovinceid = a.stateprovince"
 				+ " AND sp.territoryid = " + st.getTerritoryid()   
 				//+ " LEFT JOIN Salestaxrate str ON sp.stateprovinceid = str.stateprovince"
 				//SELECT stateprovince FROM Salestaxrate WHERE Salestaxrate.stateprovince = sp.stateprovinceid
-				+ " AND EXISTS(SELECT str.stateprovince FROM Salestaxrate str WHERE str.stateprovince = sp.stateprovinceid)"
-				+ " GROUP BY sp.stateprovinceid "
-				+ "ORDER BY sp.name";
-
+				+ " AND str MEMBER OF sp.salestaxrates"
+				+ " GROUP BY sp.stateprovinceid ";
+//				+ "ORDER BY sp.name";
 
 		//			String jpql = "SELECT sp FROM Stateprovince sp WHERE sp.name = '"+name+"'";
 		return entityManager.createQuery(jpql,Object[].class).getResultList();
