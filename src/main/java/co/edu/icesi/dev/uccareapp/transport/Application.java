@@ -95,6 +95,7 @@ public class Application {
 	    	
 	    	stateprovinceRepository.save(sp1);
 	    	
+	    	
 	    	Address a1 = new Address();
 	    	a1.setAddressline1("Line 1 of address");
 	    	a1.setCity("Cali");
@@ -126,9 +127,25 @@ public class Application {
 	    	
 	    	strRepository.save(str);
 	    	
+//	    	
+//	    	Address a2 = new Address();
+//	    	a1.setAddressline1("Line 1 of address");
+//	    	a1.setCity("Bogota");
+//	    	a1.setAddressline2("Line 2 of address");
+//	    	a1.setPostalcode("A12346");
+//	    	a1.setSpatiallocation("Comuna 2");
+//	    	addressRepository.save(a2);
 	    	
+	    	Stateprovince sp2 = new Stateprovince();
+	    	sp2.setName("Cundinamarca");
+	    	sp2.setStateprovincecode("12346");
+	    	sp2.setCountryregion(cr);
 	    	
-	    	//System.out.println(userRepository.findAll());
+	    	ArrayList<Address> ads = new ArrayList<Address>();
+	    	ads.add(a1);
+	    	sp2.setAddresses(ads);
+	    	stateprovinceRepository.save(sp2);
+	    	
 		};
 
 

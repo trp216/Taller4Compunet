@@ -7,11 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import co.edu.icesi.dev.uccareapp.transport.dao.AddressDAO;
-import co.edu.icesi.dev.uccareapp.transport.dao.CountryRegionDAO;
+import co.edu.icesi.dev.uccareapp.transport.dao.SalesTaxRateDAO;
 import co.edu.icesi.dev.uccareapp.transport.dao.SalesTerritoryDAO;
-import co.edu.icesi.dev.uccareapp.transport.dao.StateProvinceDAO;
 import co.edu.icesi.dev.uccareapp.transport.model.person.Address;
 import co.edu.icesi.dev.uccareapp.transport.model.person.Stateprovince;
+import co.edu.icesi.dev.uccareapp.transport.model.sales.Salesterritory;
 
 @Service
 public class SpecialQueriesServiceImp {
@@ -20,8 +20,17 @@ public class SpecialQueriesServiceImp {
 	private AddressDAO adDAO;
 	
 	@Autowired
-	public SpecialQueriesServiceImp(AddressDAO adDAO) {
+	private SalesTaxRateDAO strDAO;
+	
+	@Autowired
+	private SalesTerritoryDAO stDAO;
+	
+	
+	@Autowired
+	public SpecialQueriesServiceImp(AddressDAO adDAO, SalesTaxRateDAO strDAO, SalesTerritoryDAO stDAO) {
 		this.adDAO = adDAO;
+		this.strDAO = strDAO;
+		this.stDAO = stDAO;
 	}
 	
 	public List<Address> findAddressesWithSalesorderheader() {
@@ -30,8 +39,34 @@ public class SpecialQueriesServiceImp {
 			
 			ads = (ArrayList<Address>) adDAO.getAddressesWithSalesorderheader();	
 		}
-		System.out.println(ads.toString());
+		//System.out.println(">>>>>>In the service");
+		//System.out.println(ads.toString());
 		return ads;
 	}
+	
+	
+
+	public List<Stateprovince> findStateProvinceAndAddresses(Salesterritory st){
+		List<Object[]> results = strDAO.getStateProvinceAndAddresses(st);
+
+		List<Stateprovince> sps = new ArrayList<Stateprovince>();
+		
+		for (Object[] i : results) {
+			Stateprovince sp = (Stateprovince)i[0];
+			
+			Integer c = (Integer)i[1];
+			
+			sp.setAdCount(c);
+			sps.add(sp);
+		}
+		System.out.println(">>>>>>In the service");
+		System.out.println(results.toString());
+		return sps;
+	}
+	
+	public Iterable<Salesterritory> findSalesterritory(){
+		return stDAO.findAll();
+	}
+
 
 }

@@ -44,6 +44,8 @@ public class Stateprovince implements Serializable {
 	private String name;
 
 	private Integer rowguid;
+	
+	private Integer adCount;
 
 	@Size(min=5,max=5,groups=Miracle.class)
 	@Pattern(regexp="^(0|[1-9][0-9]*)$")
@@ -63,6 +65,7 @@ public class Stateprovince implements Serializable {
 	private Countryregion countryregion;
 
 	public Stateprovince() {
+		
 	}
 
 	public Address addAddress(Address address) {
@@ -76,6 +79,8 @@ public class Stateprovince implements Serializable {
 		return this.addresses;
 	}
 
+	
+	
 	public Countryregion getCountryregion() {
 		return this.countryregion;
 	}
@@ -149,6 +154,14 @@ public class Stateprovince implements Serializable {
 
 	public void setTerritoryid(Integer territoryid) {
 		this.territoryid = territoryid;
+	}
+
+	public Integer getAdCount() {
+		return adCount;
+	}
+
+	public void setAdCount(Integer adCount) {
+		this.adCount = adCount;
 	}
 
 }
