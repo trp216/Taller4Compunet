@@ -3,7 +3,6 @@ package co.edu.icesi.dev.uccareapp.transport.delegate;
 import java.util.Arrays;
 import java.util.List;
 
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
