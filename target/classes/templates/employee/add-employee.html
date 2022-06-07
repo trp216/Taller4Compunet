@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Edit Employee</title>
+    <title>Add Employee</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
         integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
@@ -15,10 +15,10 @@
 
 <body>
     <div class="container my-5">
-        <h2 class="mb-5">Edit Employee</h2>
+        <h2 class="mb-5">New Employee</h2>
         <div class="row">
             <div class="col-md-6">
-                <form action="#" th:action="@{/employee/edit/{id}(id=${employee.businessentityid})}" th:object="${employee}" method="post">
+                <form action="#" th:action="@{/employee/add/}" th:object="${employee}" method="post">
                     <div class="row">
                         <div class="form-group col-md-6">
                             <label for="birthdate" class="col-form-label">Birth Date</label>
@@ -79,6 +79,15 @@
                             <label for="vacationhours" class="col-form-label">Vacation Hours</label>
                             <input type="text" th:field="*{vacationhours}" class="form-control"
                                 id="vacationhours" placeholder="vacationhours">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="person" class="col-form-label">Associated Person</label>
+                            <select th:field="*{personid}">
+                                <option th:each="p : ${persons}" th:value="${p.businessentityid}"
+                                class="form-control" th:text="${p.firstname}"
+                                th:selected="${employee.personid = p.businessentityid}">
+                            </option>
+                            </select>
                         </div>
 
                         <div class="row">

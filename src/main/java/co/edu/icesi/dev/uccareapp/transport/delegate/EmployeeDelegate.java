@@ -7,4 +7,5 @@ public interface EmployeeDelegate {
     public Iterable<Employee> findAll();
     public void save(Employee e);
     public Employee findById(Integer id);
+    public Employee findByPersonId(Integer id);
 }

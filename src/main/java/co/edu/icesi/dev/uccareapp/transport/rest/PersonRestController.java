@@ -44,4 +44,9 @@ public class PersonRestController {
             return person;
         }
     }
+
+    @RequestMapping(value="/api/person/employee/{id}", method=RequestMethod.GET)
+    public Person findByEmployeeId(@PathVariable("id") Integer employeeid){
+        return pService.findByEmployeeId(employeeid);
+    }
 }

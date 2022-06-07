@@ -41,5 +41,8 @@ public class PersonDelegateImpl implements PersonDelegate{
         return rest.getForObject(PATH+id, Person.class);
     }
 
- 
+    @Override
+    public Person findByEmployeeId(Integer id){
+        return rest.getForObject(PATH+"employee/"+id, Person.class);
+    }
 }

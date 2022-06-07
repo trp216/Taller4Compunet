@@ -1,6 +1,7 @@
 package co.edu.icesi.dev.uccareapp.transport;
 
 import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,11 +13,15 @@ import org.thymeleaf.extras.java8time.dialect.Java8TimeDialect;
 
 import co.edu.icesi.dev.uccareapp.transport.dao.AddressDAO;
 import co.edu.icesi.dev.uccareapp.transport.dao.CountryRegionDAO;
+import co.edu.icesi.dev.uccareapp.transport.dao.EmployeeDAO;
+import co.edu.icesi.dev.uccareapp.transport.dao.PersonDAO;
 import co.edu.icesi.dev.uccareapp.transport.dao.SalesTaxRateDAO;
 import co.edu.icesi.dev.uccareapp.transport.dao.SalesTerritoryDAO;
 import co.edu.icesi.dev.uccareapp.transport.dao.StateProvinceDAO;
+import co.edu.icesi.dev.uccareapp.transport.model.hr.Employee;
 import co.edu.icesi.dev.uccareapp.transport.model.person.Address;
 import co.edu.icesi.dev.uccareapp.transport.model.person.Countryregion;
+import co.edu.icesi.dev.uccareapp.transport.model.person.Person;
 import co.edu.icesi.dev.uccareapp.transport.model.person.Stateprovince;
 import co.edu.icesi.dev.uccareapp.transport.model.sales.Salesorderheader;
 import co.edu.icesi.dev.uccareapp.transport.model.sales.Salestaxrate;
@@ -47,6 +52,8 @@ public class Application {
 			,CountryRegionDAO crRepository
 			,SalesTerritoryDAO territoryRepository
 			,SalesorderheadersRepository sohRepository
+			,PersonDAO pDAO
+			,EmployeeDAO eDAO
 			){
 
 		//para cerrar sesion:
@@ -208,7 +215,43 @@ public class Application {
 			sp3.getAddresses().add(a4);
 			
 			stateprovinceRepository.update(sp3);
-			
+
+			////////////////////////////////
+			Person p = new Person();
+			p.setAdditionalcontactinfo("N/A");
+			p.setDemographics("Mestizo");
+			p.setEmailpromotion(1);
+			p.setFirstname("Juanito");
+			p.setLastname("Perez");
+			p.setMiddlename("Francisco");
+			p.setNamestyle("N/A");
+			p.setPersontype("Empleado");
+			p.setSuffix("Suffix");
+			p.setTitle("Director");
+
+			pDAO.save(p);
+
+			Employee e = new Employee();
+			e.setBirthdate(new SimpleDateFormat("dd/MM/yyyy").parse("21/06/2000"));
+			e.setCurrentflag("Flag 1");
+			e.setGender("Masculino");
+			e.setHiredate(new SimpleDateFormat("dd/MM/yyyy").parse("10/08/2015"));
+			e.setJobtitle("Ingeniero");
+			e.setLoginid("Loginid");
+			e.setMaritalstatus("Casado");
+			e.setNationalidnumber("123456789");
+			e.setOrganizationnode("Logistica");
+			e.setSalariedflag("Y");
+			e.setSickleavehours(8);
+			e.setVacationhours(10);
+
+			eDAO.save(e);
+			Person pFound = pDAO.findById(1);
+			Employee eFound = eDAO.findById(1);
+			pFound.setEmployeeId(eFound.getBusinessentityid());
+			eFound.setPersonid(pFound.getEmployeeId());
+			pDAO.update(pFound);
+			eDAO.update(eFound);
 		};
 
 

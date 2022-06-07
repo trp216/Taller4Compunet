@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import co.edu.icesi.dev.uccareapp.transport.delegate.EmployeeDelegate;
 import co.edu.icesi.dev.uccareapp.transport.delegate.PersonDelegate;
+import co.edu.icesi.dev.uccareapp.transport.model.hr.Employee;
 import co.edu.icesi.dev.uccareapp.transport.model.person.Person;
 
 @Controller
@@ -17,15 +19,27 @@ public class PersonControllerImpl {
 
     private PersonDelegate pDelegate;
 
+    private EmployeeDelegate eDelegate;
+
     @Autowired
-    public PersonControllerImpl(PersonDelegate d){
+    public PersonControllerImpl(PersonDelegate d, EmployeeDelegate e){
         pDelegate = d;
+        eDelegate = e;
     }
     
     @GetMapping("/person/")
     public String indexPersons(Model model) {
         model.addAttribute("persons", pDelegate.findAll());
         return "person/index";
+    }
+
+    @GetMapping("/person/{id}")
+    public String indexSinglePerson(@PathVariable("id") Integer id, Model model){
+        Person pFound = pDelegate.findById(id);
+        Employee eFound = eDelegate.findByPersonId(id);
+        model.addAttribute("person", pFound);
+        model.addAttribute("employee", eFound);
+        return "person/single-person";
     }
 
     @GetMapping("/person/add")
