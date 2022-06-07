@@ -11,6 +11,8 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import co.edu.icesi.dev.uccareapp.transport.model.person.Countryregion;
+import co.edu.icesi.dev.uccareapp.transport.model.person.Person;
+import co.edu.icesi.dev.uccareapp.transport.model.person.Stateprovince;
 
 @Repository
 @Transactional
@@ -49,6 +51,18 @@ public class CountryRegionDAO implements ICountryRegionDAO{
 		String jpql = "Select a from Countryregion a";
 		TypedQuery<Countryregion> ret = entityManager.createQuery(jpql, Countryregion.class);
 		return 	ret.getResultList();	
+	}
+	
+	public Countryregion findByStateprovince(Integer stateprovinceid){
+		 String jpql = "SELECT cr "
+		 		+ "FROM Stateprovince sp, Countryregion cr "
+		 		+ "WHERE sp.stateprovinceid = " + stateprovinceid 
+		 		+ " AND sp MEMBER OF cr.stateprovinces";
+	        TypedQuery<Countryregion> ret = entityManager.createQuery(jpql, Countryregion.class);
+	        if(ret.getResultList().isEmpty()){
+	            return null;
+	        }
+	        return ret.getResultList().get(0);
 	}
 	
 }

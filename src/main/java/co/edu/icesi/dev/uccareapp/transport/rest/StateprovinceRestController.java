@@ -69,4 +69,9 @@ public class StateprovinceRestController {
 		return stService.findAll();
 	}
 
+	@RequestMapping(value = "/api/stateprovince/countryregion/{id}", method = RequestMethod.GET)
+	public Iterable<Stateprovince> findByCountryregion(@PathVariable("id") Integer crid){
+		return spService.findByCountryregion(crid);
+	}
+	
 }

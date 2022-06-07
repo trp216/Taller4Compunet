@@ -40,7 +40,15 @@
 								<td th:text="${sp.stateprovinceid}"></td>
 								<td th:text="${sp.stateprovincecode}"></td>
 								<td th:text="${sp.name}"></td>
-								<td th:text="${sp.countryregion.name}"></td>
+								<td>
+									<span th:if=${sp.countryregion!=null}>
+									<a th:href="@{/countryregion/{id}(id=${sp.countryregion.countryregionid})}" 
+									class="btn btn-primary"><i class="fas fa-user-tie ml-2"></i>
+									</a></span>
+									<span
+									th:if=${sp.countryregion==null}><a class="text-info">No
+											country-region</a></span>
+								</td>
 								<td th:text="${sp.territoryid}"></td>
 								<td><a th:href="@{/stateprovince/edit/{id}(id=${sp.stateprovinceid})}"
                                     class="btn btn-primary"><i class="fas fa-user-edit ml-2"></i></a></td>

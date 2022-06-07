@@ -252,6 +252,18 @@ public class Application {
 			eFound.setPersonid(pFound.getEmployeeId());
 			pDAO.update(pFound);
 			eDAO.update(eFound);
+			
+			///////////////////////////////////////////
+			ArrayList<Stateprovince> sps1 = new ArrayList<Stateprovince>();
+			sps1.add(sp1);
+			sps1.add(sp2);
+			
+			cr.setStateprovinces(sps1);
+			
+			crRepository.update(cr);
+			
+			//System.out.println(crRepository.findById(cr.getCountryregionid()).getName() + ": " + crRepository.findById(cr.getCountryregionid()).getStateprovinces().toString());
+			
 		};
 
 

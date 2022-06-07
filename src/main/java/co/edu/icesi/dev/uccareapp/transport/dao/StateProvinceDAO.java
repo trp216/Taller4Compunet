@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import co.edu.icesi.dev.uccareapp.transport.model.person.Address;
+import co.edu.icesi.dev.uccareapp.transport.model.person.Person;
 import co.edu.icesi.dev.uccareapp.transport.model.person.Stateprovince;
 
 @Repository
@@ -123,6 +124,17 @@ public class StateProvinceDAO implements IStateProvinceDAO{
 				+ "ORDER BY sp.name";
 
 		return entityManager.createQuery(jpql,Object[].class).getResultList();
+	}
+
+	public List<Stateprovince> findByCountryregion(Integer crid){
+		String jpql = "SELECT sp "
+				+ "FROM Stateprovince sp, Countryregion cr "
+				+ "WHERE sp.countryregion = "+ crid;
+		TypedQuery<Stateprovince> ret = entityManager.createQuery(jpql, Stateprovince.class);
+		if(ret.getResultList().isEmpty()){
+			return null;
+		}
+		return ret.getResultList();
 	}
 
 }

@@ -144,4 +144,8 @@ public class StateprovinceServiceImp implements StateprovinceService{
 		return actual;
 		
 	}
+	
+	public Iterable<Stateprovince> findByCountryregion(Integer crid){
+		return spDAO.findByCountryregion(crid);
+	}
 }

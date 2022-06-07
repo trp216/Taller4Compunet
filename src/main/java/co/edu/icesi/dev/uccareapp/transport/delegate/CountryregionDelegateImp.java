@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
 import co.edu.icesi.dev.uccareapp.transport.model.person.Countryregion;
+import co.edu.icesi.dev.uccareapp.transport.model.person.Stateprovince;
 
 @Component
 public class CountryregionDelegateImp implements CountryregionDelegate{
@@ -42,6 +43,9 @@ public class CountryregionDelegateImp implements CountryregionDelegate{
 		return countryregion;
 	}
 	
-	
+	public Countryregion findByStateprovince(Integer stateprovinceid){
+		return rest.getForObject(PATH+"stateprovince/"+stateprovinceid, Countryregion.class);
+		
+	}
 
 }

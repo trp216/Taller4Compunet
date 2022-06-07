@@ -51,5 +51,10 @@ public class StateprovinceDelegateImp implements StateprovinceDelegate{
 		Salesterritory[] sts = rest.getForObject(PATH + "salesterritory/", Salesterritory[].class);
 		return Arrays.asList(sts);
 	}
+	
+	public Iterable<Stateprovince> findByCountryregion(Integer id){
+		Stateprovince[] sps = rest.getForObject(PATH+"countryregion/"+id, Stateprovince[].class);
+		return Arrays.asList(sps);
+	}
 
 }

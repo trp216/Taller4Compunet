@@ -8,23 +8,37 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import co.edu.icesi.dev.uccareapp.transport.delegate.CountryregionDelegateImp;
+import co.edu.icesi.dev.uccareapp.transport.delegate.StateprovinceDelegateImp;
 import co.edu.icesi.dev.uccareapp.transport.model.person.Countryregion;
+import co.edu.icesi.dev.uccareapp.transport.model.person.Stateprovince;
 import co.edu.icesi.dev.uccareapp.transport.validation.Miracle;
 
 @Controller
 public class CountryregionControllerImpl {
 	
 	private CountryregionDelegateImp crDelegate;
+	
+	private StateprovinceDelegateImp spDelegate;
 
 	@Autowired
-	public CountryregionControllerImpl(CountryregionDelegateImp crDelegate) {
+	public CountryregionControllerImpl(CountryregionDelegateImp crDelegate, StateprovinceDelegateImp spDelegate) {
 		this.crDelegate = crDelegate;
+		this.spDelegate = spDelegate;
 	}
 	
 	@GetMapping("/countryregion")
 	public String indexCountryregion(Model model) {
 		model.addAttribute("countries", crDelegate.findAll());
 		return "countryregion/index";
+	}
+	
+	@GetMapping("/countryregion/{id}")
+	public String indexSingleCountryregion(@PathVariable("id") Integer id, Model model) {
+		Countryregion crFound = crDelegate.findById(id);
+		Iterable<Stateprovince> spFound = spDelegate.findByCountryregion(id);
+		model.addAttribute("country", crFound);
+		model.addAttribute("stateprovince", spFound);
+		return "countryregion/single-countryregion"; 
 	}
 	
 	@GetMapping("/countryregion/add")
