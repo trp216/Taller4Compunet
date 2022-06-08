@@ -7,8 +7,10 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import co.edu.icesi.dev.uccareapp.transport.delegate.AddressDelegateImp;
 import co.edu.icesi.dev.uccareapp.transport.delegate.CountryregionDelegateImp;
 import co.edu.icesi.dev.uccareapp.transport.delegate.StateprovinceDelegateImp;
+import co.edu.icesi.dev.uccareapp.transport.model.person.Address;
 import co.edu.icesi.dev.uccareapp.transport.model.person.Countryregion;
 import co.edu.icesi.dev.uccareapp.transport.model.person.Stateprovince;
 import co.edu.icesi.dev.uccareapp.transport.validation.Miracle;
@@ -19,12 +21,16 @@ public class StateprovinceControllerImpl {
 	private StateprovinceDelegateImp spDelegate;
 	
 	private CountryregionDelegateImp crDelegate;
+	
+	private AddressDelegateImp adDelegate;
 
 	@Autowired
 	public StateprovinceControllerImpl(StateprovinceDelegateImp spDelegate,
-			CountryregionDelegateImp crDelegate) {
+			CountryregionDelegateImp crDelegate,
+			AddressDelegateImp adDelegate) {
 		this.spDelegate = spDelegate;
 		this.crDelegate = crDelegate;
+		this.adDelegate = adDelegate;
 	}
 		
 	@GetMapping("/stateprovince/")
@@ -40,6 +46,15 @@ public class StateprovinceControllerImpl {
 		model.addAttribute("stateprovince", spFound);
         model.addAttribute("countryregion", crFound);
         return "stateprovince/single-stateprovince";
+	}
+	
+	@GetMapping("/stateprovince/address/{id}")
+	public String indexSingleStateprovince2(@PathVariable("id") Integer id, Model model) {
+		Stateprovince spFound = spDelegate.findById(id);
+		Address adFound = adDelegate.findByStateprovince(id);
+		model.addAttribute("stateprovince", spFound);
+        model.addAttribute("address", adFound);
+        return "stateprovince/single-stateprovince2";
 	}
 	
 	@GetMapping("/stateprovince/add")

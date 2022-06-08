@@ -46,5 +46,9 @@ public class AddressDelegateImp implements AddressDelegate{
 		Stateprovince[] sps = rest.getForObject(PATH + "stateprovinces/", Stateprovince[].class);
 		return Arrays.asList(sps);
 	}
+	
+	public Address findByStateprovince(Integer id) {
+		return rest.getForObject(PATH+"stateprovince/"+id, Address.class);
+	}
 
 }

@@ -11,6 +11,7 @@ import co.edu.icesi.dev.uccareapp.transport.dao.StateProvinceDAO;
 import co.edu.icesi.dev.uccareapp.transport.exception.ElementNotFoundException;
 import co.edu.icesi.dev.uccareapp.transport.exception.FailedValidationsException;
 import co.edu.icesi.dev.uccareapp.transport.model.person.Address;
+import co.edu.icesi.dev.uccareapp.transport.model.person.Person;
 import co.edu.icesi.dev.uccareapp.transport.model.person.Stateprovince;
 
 @Service
@@ -109,5 +110,9 @@ public class AddressServiceImp implements AddressService{
 		return actual;
 
 	}
+	
+	 public Address findByStateprovince(Integer id) {
+	        return addressDAO.findByStateprovince(id);
+	    }
 
 }

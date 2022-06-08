@@ -57,8 +57,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		.antMatchers("/tax/**").hasRole("admin")
 		//.antMatchers("/users/**").hasRole("operator")
 		.antMatchers("/address/**").hasRole("operator")
-		.antMatchers("/stateprovince/**").hasRole("operator")
-		.antMatchers("/stateprovince/**").hasRole("admin")
+//		.antMatchers("/stateprovince/**").hasRole("operator")
+//		.antMatchers("/stateprovince/**").hasRole("admin")
 		.anyRequest().authenticated().and().httpBasic().and().logout().invalidateHttpSession(true)
 		.clearAuthentication(true).logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
 		.logoutSuccessUrl("/login?logout").

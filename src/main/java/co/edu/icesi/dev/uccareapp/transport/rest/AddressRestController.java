@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import co.edu.icesi.dev.uccareapp.transport.services.AddressServiceImp;
 
 import co.edu.icesi.dev.uccareapp.transport.model.person.Address;
+import co.edu.icesi.dev.uccareapp.transport.model.person.Person;
 import co.edu.icesi.dev.uccareapp.transport.model.person.Stateprovince;
 import co.edu.icesi.dev.uccareapp.transport.services.StateprovinceServiceImp;
 
@@ -65,4 +66,8 @@ public class AddressRestController {
 		return spService.findAll();
 	}
 	
+	 @RequestMapping(value="/api/address/stateprovince/{id}", method=RequestMethod.GET)
+	    public Address findByStateprovince(@PathVariable("id") Integer id){
+	        return adService.findByStateprovince(id);
+	    }
 }

@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import co.edu.icesi.dev.uccareapp.transport.model.person.Address;
+import co.edu.icesi.dev.uccareapp.transport.model.person.Stateprovince;
 
 @Repository
 @Transactional
@@ -106,6 +107,17 @@ public class AddressDAO implements IAddressDAO{
 		String jpql = "Select a from Address a WHERE a.sohcount >= 2";
 		return entityManager.createQuery(jpql,Address.class).getResultList();
 		
+	}
+	
+	public Address findByStateprovince(Integer id){
+		String jpql = "SELECT ad "
+				+ "FROM Address ad "
+				+ "WHERE ad.stateprovince = "+ id;
+		TypedQuery<Address> ret = entityManager.createQuery(jpql, Address.class);
+		if(ret.getResultList().isEmpty()){
+			return null;
+		}
+		return ret.getResultList().get(0);
 	}
 	
 }
