@@ -29,10 +29,8 @@
 								<th>Id</th>
 								<th>Code</th>
 								<th>Name</th>
-								<th>Associated country</th>
-								<th>Sales territory</th>
 								<th>Amount of addresses</th>
-								<th>Editar</th>
+								<th>Edit</th>
 								
 							</tr>
 						</thead>
@@ -41,8 +39,6 @@
 								<td th:text="${sp.stateprovinceid}"></td>
 								<td th:text="${sp.stateprovincecode}"></td>
 								<td th:text="${sp.name}"></td>
-								<td th:text="${sp.countryregion.name}"></td>
-								<td th:text="${sp.territoryid}"></td>
 								<td th:text="${sp.adcount}"></td>
 								<td><a th:href="@{/stateprovince/edit/{id}(id=${sp.stateprovinceid})}"
                                     class="btn btn-primary"><i class="fas fa-user-edit ml-2"></i></a></td>
