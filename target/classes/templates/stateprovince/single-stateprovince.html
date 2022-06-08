@@ -29,8 +29,6 @@
 								<th>Id</th>
 								<th>Code</th>
 								<th>Name</th>
-								<th>Country-region</th>
-								<th>Editar</th>
 								
 							</tr>
 						</thead>
@@ -39,15 +37,6 @@
 								<td th:text="${stateprovince.stateprovinceid}"></td>
 								<td th:text="${stateprovince.stateprovincecode}"></td>
 								<td th:text="${stateprovince.name}"></td>
-								<td>
-									<span th:if=${stateprovince.countryregion!=null}>
-									<a th:href="@{/countryregion/{id}(id=${stateprovince.countryregion.countryregionid})}" 
-									class="btn btn-primary"><i class="fas fa-user-tie ml-2"></i>
-									</a></span>
-									<span
-									th:if=${stateprovince.countryregion==null}><a class="text-info">No
-											country-region</a></span>
-								</td>
 								<td><a th:href="@{/stateprovince/edit/{id}(id=${stateprovince.stateprovinceid})}"
                                     class="btn btn-primary"><i class="fas fa-user-edit ml-2"></i></a></td>
                                   

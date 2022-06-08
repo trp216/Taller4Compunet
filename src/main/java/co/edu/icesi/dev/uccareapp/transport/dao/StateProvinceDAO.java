@@ -11,7 +11,6 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import co.edu.icesi.dev.uccareapp.transport.model.person.Address;
-import co.edu.icesi.dev.uccareapp.transport.model.person.Person;
 import co.edu.icesi.dev.uccareapp.transport.model.person.Stateprovince;
 
 @Repository

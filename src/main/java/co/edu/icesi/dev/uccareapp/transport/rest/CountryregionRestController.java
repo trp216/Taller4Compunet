@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import co.edu.icesi.dev.uccareapp.transport.model.person.Countryregion;
-import co.edu.icesi.dev.uccareapp.transport.model.person.Stateprovince;
 import co.edu.icesi.dev.uccareapp.transport.services.CountryregionServiceImp;
 
 
@@ -19,8 +18,9 @@ public class CountryregionRestController {
 	private CountryregionServiceImp crService;
 
 	@RequestMapping(value = "/api/countryregion/", method = RequestMethod.GET)
-	public Iterable<Countryregion> findAll() {
-		return crService.findAll();
+	public Object findAll() {
+		Object list = crService.findAll();
+		return list;
 	}
 
 

@@ -40,7 +40,14 @@
 								<td th:text="${tax.name}"></td>
 								<td th:text="${tax.taxrate}"></td>
 								<td th:text="${tax.taxtype}"></td>
-								<td th:text="${tax.stateprovince.name}"></td>
+								<td>
+									<span th:if=${tax.stateprovince!=null}>
+									<a th:href="@{/stateprovince/{id}(id=${tax.stateprovince.stateprovinceid})}" class="btn btn-primary"><i class="fas fa-user-tie ml-2"></i></a>
+									</span>
+									<span
+									th:if=${tax.stateprovince==null}><a class="text-info">No
+											State Province</a></span>
+								</td>
 								<td><a th:href="@{/tax/edit/{id}(id=${tax.salestaxrateid})}"
                                     class="btn btn-primary"><i class="fas fa-user-edit ml-2"></i></a></td>
 								

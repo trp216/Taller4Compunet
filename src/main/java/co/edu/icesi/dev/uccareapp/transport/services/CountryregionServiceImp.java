@@ -1,7 +1,5 @@
 package co.edu.icesi.dev.uccareapp.transport.services;
 
-import java.util.List;
-
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +8,6 @@ import org.springframework.stereotype.Service;
 import co.edu.icesi.dev.uccareapp.transport.dao.CountryRegionDAO;
 import co.edu.icesi.dev.uccareapp.transport.exception.FailedValidationsException;
 import co.edu.icesi.dev.uccareapp.transport.model.person.Countryregion;
-import co.edu.icesi.dev.uccareapp.transport.model.person.Stateprovince;
 
 @Service
 public class CountryregionServiceImp implements CountryregionService{
